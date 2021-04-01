@@ -1,0 +1,33 @@
+<p>serviceproviderlist works!</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Provider_ID</th>
+      <th scope="col">Manager</th>
+      <th scope="col">Name</th>
+      <th scope="col">Address_1</th>
+      <th scope="col">Address_2</th>
+      <th scope="col">City</th>
+      <th scope="col">State</th>
+      <th scope="col">Zip</th>
+      <th scope="col">Country</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sp of serviceproviders" appMouseHover>
+      <th scope="row" (click)="onSelect(sp)">{{sp.provider_id}}</th>
+      <td>{{sp.manager}}</td>
+      <td>{{sp.name}}</td>
+      <td>{{sp.address_1}}</td>
+      <td>{{sp.address_2}}</td>
+      <td>{{sp.city}}</td>
+      <td>{{sp.state}}</td>
+      <td>{{sp.zip}}</td>
+      <td>{{sp.country}}</td>
+      <td><button type="button" class="btn btn-primary"(click)="editSP(sp)">Edit</button>
+      <button type="button" class="btn btn-warning" (click)="openSweetAlert(sp)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+
