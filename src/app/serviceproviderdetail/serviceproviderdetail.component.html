@@ -1,0 +1,14 @@
+<div *ngIf="sp">
+  <h2 [ngStyle]="{'margin-bottom':'25px'}">Sevice Provider's Detail</h2>
+  <p>Provider_ID: {{sp.provider_id}}</p>
+  <p>Manager: {{sp.manager}}</p>
+  <p>Name: {{sp.name}}</p>
+  <p>address_1: {{sp.address_1}}</p>
+  <p>address_2: {{sp.address_2}}</p>
+  <p>city: {{sp.city}}</p>
+  <p>state: {{sp.state}}</p>
+  <p>zip: {{sp.state}}</p>
+  <p>state: {{sp.country}}</p>
+</div>
+
+<button type="button" class="btn btn-warning" (click)="goBack()">Go Back</button>
