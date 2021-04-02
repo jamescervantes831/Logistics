@@ -1,33 +1,21 @@
 "use strict";
 exports.__esModule = true;
 var express = require('express');
-var pg_1 = require("pg");
-var connectionString = "postgresql://logisticsapp@logistics-db:brightrace@logistics-db.postgres.database.azure.com/logisticsdb";
+// var router = express.router;
+var providers = require('./router/providerRouter');
+var contacts = require('./router/contactService');
+var notes = require('./router/noteService');
+var users = require('./router/userService');
+
 var app = express();
 
-app.get('/providers', (req, res) => {
-    /* this is the basic setup for connecting to the database */
-    var queryString = "SELECT * FROM Titles";
-    var client = new pg_1.Client(connectionString);
-    var result;
-    client.connect();
-    client.query(queryString, function(err, qres) {
-        if (err)
-            console.log(err); // for testing, we will handle errors here
-        result = qres;
-        console.log(); // just for testing to see respons in console
-        res.send(qres.rows) // return the response here ( qres.rows will contain the actual data)
-        client.end(); // NEVER FORGET TO END THE CLIENT!!!!
-    });
-    return; // we can return true/false or whatever we want to the backend server
-});
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use('/providers', providers); // access the providers table
+app.use('/contacts', contacts); // accesses the contacts table -- potentially extend to /contacts/:providerid for only contacts for that providerid and /contacts/:providerid/:contactid for specific contact
+app.use('/notes', notes); // accesses the notes table -- potentiall extend to /notes/:providerid for contacts for specificy provider and /notes/:providerid/:noteid for specific note
+app.use('/users', users); // accesses authentication table -- potentially extend to /users/:userid for provider
 
-app.get('/providers/:id', (req, res) => {
-    c.send("sending service provider with id: " + req.params.id);
-});
-app.get('/providers/:id/contact', (req, res) => {
-    res.send("Sending client list for provider with id: " + req.params.id);
-});
 
 // start listening on port 5433
 var server = app.listen(5433, () => {
