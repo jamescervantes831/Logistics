@@ -10,6 +10,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { ServiceproviderdetailComponent } from './serviceproviderdetail/serviceproviderdetail.component';
 import { ServiceproviderlistComponent } from './serviceproviderlist/serviceproviderlist.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -26,7 +27,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes),
+    ReactiveFormsModule
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
