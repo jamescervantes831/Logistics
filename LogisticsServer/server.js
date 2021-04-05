@@ -1,13 +1,14 @@
 "use strict";
 exports.__esModule = true;
 var express = require('express');
+var cors = require('cors');
 var providers = require('./router/providerRouter');
 // var contacts = require('./router/contactRouter'); TODO: Implement contacts router
 // var notes = require('./router/noteRouter'); TODO: Implement note router
 var users = require('./router/userRouter');
 
 var app = express();
-
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use('/providers', providers); // access the providers table
