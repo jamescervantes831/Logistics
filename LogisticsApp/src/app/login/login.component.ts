@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { FormArray, Validators } from '@angular/forms';
-//import { GetuserinfoService } from '../services/getuserinfo.service';
+import { GetuserinfoService } from '../services/getuserinfo.service';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,10 @@ export class LoginComponent implements OnInit {
 
   
   constructor(private router: Router,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private userService: GetuserinfoService,
+              private accountService: AccountService) { }
+
   public loginForm: any;
   ngOnInit(): void {
     // this.cusService.getCustomers().subscribe(
@@ -28,8 +32,8 @@ export class LoginComponent implements OnInit {
     
   }
 
+
   onSubmit(loginForm:any){
-    
   }
 
   navigateToHome(){

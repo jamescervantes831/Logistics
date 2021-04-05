@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { User } from '../module/user';
+import { Provider } from '../module/provider';
 import { Observable, throwError } from 'rxjs';
 import { catchError} from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class GetuserinfoService {
-  private _url: string = 'http://localhost:5433/users';
+export class GetprovidersService {
+  private _url: string = 'http://localhost:5433/providers';
   
   constructor(private http: HttpClient) { }
 
-  getCustomers() : Observable<User[]>{
-    return this.http.get<User[]>(this._url)
+  getProviders() : Observable<Provider[]>{
+    return this.http.get<Provider[]>(this._url)
     .pipe(catchError(this.errorHandler));
   }
 
-  getCustomersById(id:string) : Observable<User[]>{
-    return this.http.get<User[]>(this._url + '/' + id)
+  getCustomersById(id:string) : Observable<Provider[]>{
+    return this.http.get<Provider[]>(this._url + '/' + id)
     .pipe(catchError(this.errorHandler));
   }
 
@@ -26,3 +27,4 @@ export class GetuserinfoService {
     return throwError(error.message || "Server Error");
   }
 }
+

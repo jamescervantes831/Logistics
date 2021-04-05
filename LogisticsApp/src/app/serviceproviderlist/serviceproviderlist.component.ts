@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { GetprovidersService } from '../services/getproviders.service';
 
 @Component({
   selector: 'app-serviceproviderlist',
@@ -9,14 +10,17 @@ import Swal from 'sweetalert2';
 })
 export class ServiceproviderlistComponent implements OnInit {
 
-  serviceproviders=[];
-
-  constructor(private router: Router) { }
+  serviceproviders: any=[];
+  errorMsg: any;
+  constructor(private router: Router,
+              private providerService: GetprovidersService) { }
 
   ngOnInit(): void {
-    this.serviceproviders = [
-      {"provider_id": 1200, "manager": "william", "name": "David", "address_1": "51 forest", "address_2": "52 forest", "city": "piscataway", "state": "NJ", "zip": "08854", "country": "USA"}
-    ];
+    this.providerService.getProviders().subscribe(
+      (data) => {this.serviceproviders = data,console.log(this.serviceproviders)},
+      (error) => this.errorMsg = error,
+    )
+     
   }
 
   onSelect(sp: any){

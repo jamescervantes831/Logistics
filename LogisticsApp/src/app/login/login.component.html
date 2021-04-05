@@ -2,12 +2,12 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
   <div class="container" name="loginForm">
 
-    <label for="uname" class="floatleft"><b>Login ID</b></label>
+    <label for="uname" class="floatleft"><b>Enter ID</b></label>
 
     <input type="text" placeholder="Enter ID" [class.is-invalid]="id.invalid && id.touched" formControlName="id" class="form-control">
     <div *ngIf="id.touched">
-      <div class="alert alert-danger" *ngIf="id.errors?.required">id is required</div>
-      <div class="alert alert-danger" *ngIf="id.errors?.minlength">id must be at least 3 characters</div>
+      <div class="alert alert-danger" *ngIf="id.errors?.required">username is required</div>
+      <div class="alert alert-danger" *ngIf="id.errors?.minlength">username must be at least 3 characters</div>
     </div>
 
     <label for="psw" class="floatleft"><b>Password</b></label>
@@ -18,7 +18,7 @@
       <div class="alert alert-danger" *ngIf="password.errors?.minlength">password must be at least 3 characters</div>
     </div>
 
-    <button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid" (click)="navigateToHome()" [disabled]="!loginForm.valid">Login</button>
+    <button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid" (click)=navigateToHome() [disabled]="!loginForm.valid">Login</button>
   
 
     <label>
