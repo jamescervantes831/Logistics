@@ -12,20 +12,21 @@ export class GetuserinfoService {
   
   constructor(private http: HttpClient) { }
 
-  getCustomers() : Observable<Customer[]>{
-    return this.http.get<Customer[]>(this._url,
+  getCustomers(): Observable<Customer> {
+    return this.http.get<Customer>(this._url,
       {
         headers: new HttpHeaders({
           'Access-Control-Allow-Origin': `${this._url}`
         })
-      })
+      }
+      )
     .pipe(
       catchError(this.errorHandler)
       );
   }
 
-  getCustomersById(id:number) : Observable<Customer>{
-    return this.http.get<Customer>(`${this._url}/${id}`,
+  getCustomersById(userid: string) : Observable<Customer>{
+    return this.http.get<Customer>(`${this._url}/${userid}`,
     {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': `${this._url}`
@@ -60,5 +61,9 @@ export class GetuserinfoService {
 
   errorHandler(error: HttpErrorResponse){
     return throwError(error.message || "Server Error");
+  }
+
+  getURL(){
+    return this._url;
   }
 }
