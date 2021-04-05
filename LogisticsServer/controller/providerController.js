@@ -6,6 +6,7 @@ module.exports = {
         getAllProvidersQuery = 'SELECT * FROM service_providers';
 
         runQuery(getAllProvidersQuery,
+
             (err, result) => {
                 if (err) {
                     console.log(err)
@@ -19,6 +20,7 @@ module.exports = {
     },
 
     getProvider: (req, res) => {
+
         getProviderQuery = `SELECT * FROM service_providers
             WHERE providerid='${req.params.providerid}';`;
 
