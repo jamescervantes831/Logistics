@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-//import { GetuserinfoService } from '../services/getuserinfo.service';
+import { GetuserinfoService } from '../services/getuserinfo.service';
 
 @Component({
   selector: 'app-login',
@@ -10,20 +10,26 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, private fb: FormBuilder) { }
+  constructor(private router: Router, 
+    private fb: FormBuilder,
+    private userService: GetuserinfoService) { }
 
-  public loginForm: FormGroup;
+  public loginForm: FormGroup = this.fb.group({
+    userid: ['', [Validators.required, Validators.minLength(3)] ],
+    password: ['', [Validators.required, Validators.minLength(3)] ]
+  });;
 
   ngOnInit(): void {
-    this.loginForm = this.fb.group({
-      userid: ['', [Validators.required, Validators.minLength(3)] ],
-      password: ['', [Validators.required, Validators.minLength(3)] ]
-    });
-    
+    // this.userService.getCustomers()
+    // .subscribe(
+    //   (data) => {
+    //     console.log(`DATA: ${data}`)
+    //   },
+    //   (error) => console.log(`ERROR: ${error}`)
+    // )
   }
 
-  onSubmit(loginForm:any){
-    
+  onSubmit(){
   }
 
   navigateToHome(){

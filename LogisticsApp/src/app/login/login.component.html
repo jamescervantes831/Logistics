@@ -2,7 +2,7 @@
 <div class="grandParentContaniner">
 <div class="parentContainer">
 <!--^^containers to center login^^-->
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)" >
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()"  method="GET">
     <label for="userid"><b>Login ID</b></label>
     <input type="text" placeholder="Enter login" [class.is-invalid]="id.invalid && id.touched" formControlName="userid" class="form-control" name="password">
     <div *ngIf="id.touched">
@@ -16,7 +16,7 @@
       <div class="alert alert-danger" *ngIf="password.errors?.required">password is required</div>
       <div class="alert alert-danger" *ngIf="password.errors?.minlength">password must be at least 3 characters</div>
     </div>
-      <button type="submit" class="btn btn-primary  btn-sm" ng-disabled="loginForm.$invalid" (click)="navigateToHome()" [disabled]="!loginForm.valid">Login</button>
+      <button type="submit" class="btn btn-primary  btn-sm" ng-disabled="loginForm.$invalid" [disabled]="!loginForm.valid">Login</button>
     
       <button type="button" class="btn btn-sm btn-primary"(click)="navigateToForgotPassword()">Forgot Password?</button>
       <label>
