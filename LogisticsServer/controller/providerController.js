@@ -48,11 +48,11 @@ module.exports = {
                             '${req.body.state}',
                             '${req.body.zip}',
                             '${req.body.country}')`;
-        console.log(query);
+        console.log(addProviderQuery);
         runQuery(addProviderQuery, 
             (err, result) => {
                 if (err){
-                    console.log(err)
+                    // console.log(err)
                     return;
                 }
                 return res.status(200).json({
@@ -64,14 +64,16 @@ module.exports = {
 
     updateProvider: (req, res) => {
         updateProviderQuery = `UPDATE service_providers
-                                SET  name = '${req.body.name}',
-                                            '${req.body.address_1}',
-                                            '${req.body.address_2}',
-                                            '${req.body.city}',
-                                            '${req.body.state}',
-                                            '${req.body.zip}',
-                                            '${req.body.country}'
-                                WHERE providerid = '${req.params.id}';`;
+                                SET
+                                    manager = (SELECT userid FROM authentication WHERE userid = '${req.body.manager}'),
+                                    name = '${req.body.name}',
+                                    address_1 = '${req.body.address_1}',
+                                    address_2 = '${req.body.address_2}',
+                                    city = '${req.body.city}',
+                                    state = '${req.body.state}',
+                                    zip = '${req.body.zip}',
+                                    country = '${req.body.country}'
+                                WHERE providerid = '${req.params.providerid}';`;
         console.log(updateProviderQuery);
         runQuery(updateProviderQuery, 
             (err, result) => {
@@ -80,10 +82,27 @@ module.exports = {
                     return;
                 }
                 return res.status(200).json({
-                    message: `Service Provider of ID: ${req.body.id} is updated`,
+                    message: `Service Provider of ID: ${req.body.providerid} is updated`,
                     data: result
                 })
             });
 
+    },
+
+    deleteProvider: (req, res) => {
+        deleteProviderQuery = `DELETE FROM service_providers
+                                WHERE providerid = '${req.params.providerid}';`
+        
+        runQuery(deleteProviderQuery, 
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                return res.status(200).json({
+                    message: `Provider of ID: ${req.params.providerid} is deleted `,
+                    data: result
+                })
+            })
     }
 }
