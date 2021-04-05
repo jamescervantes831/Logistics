@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
-import { FormArray, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 //import { GetuserinfoService } from '../services/getuserinfo.service';
 
 @Component({
@@ -11,19 +10,14 @@ import { FormArray, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  
-  constructor(private router: Router,
-              private fb: FormBuilder) { }
-  public loginForm: any;
+  constructor(private router: Router, private fb: FormBuilder) { }
+
+  public loginForm: FormGroup;
+
   ngOnInit(): void {
-    // this.cusService.getCustomers().subscribe(
-    //   (data) => this.customers = data,
-    //   (error) => this.errorMsg = error,
-    // )
     this.loginForm = this.fb.group({
-      id: ['', [Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(3)]],
-      
+      userid: ['', [Validators.required, Validators.minLength(3)] ],
+      password: ['', [Validators.required, Validators.minLength(3)] ]
     });
     
   }
