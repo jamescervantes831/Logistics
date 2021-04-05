@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
-import { FormArray, Validators } from '@angular/forms';
-//import { GetuserinfoService } from '../services/getuserinfo.service';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { GetuserinfoService } from '../services/getuserinfo.service';
 
 @Component({
   selector: 'app-login',
@@ -11,25 +10,26 @@ import { FormArray, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  
-  constructor(private router: Router,
-              private fb: FormBuilder) { }
-  public loginForm: any;
+  constructor(private router: Router, 
+    private fb: FormBuilder,
+    private userService: GetuserinfoService) { }
+
+  public loginForm: FormGroup = this.fb.group({
+    userid: ['', [Validators.required, Validators.minLength(3)] ],
+    password: ['', [Validators.required, Validators.minLength(3)] ]
+  });;
+
   ngOnInit(): void {
-    // this.cusService.getCustomers().subscribe(
-    //   (data) => this.customers = data,
-    //   (error) => this.errorMsg = error,
+    // this.userService.getCustomers()
+    // .subscribe(
+    //   (data) => {
+    //     console.log(`DATA: ${data}`)
+    //   },
+    //   (error) => console.log(`ERROR: ${error}`)
     // )
-    this.loginForm = this.fb.group({
-      id: ['', [Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(3)]],
-      
-    });
-    
   }
 
-  onSubmit(loginForm:any){
-    
+  onSubmit(){
   }
 
   navigateToHome(){
