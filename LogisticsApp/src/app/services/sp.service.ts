@@ -1,24 +1,34 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Provider } from '../module/provider';
-import { Observable, throwError } from 'rxjs';
-import { catchError} from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Provider } from '../module/provider'
+import { Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpService {
-
   private _url: string = 'http://localhost:5433/providers';
-  
   constructor(private http: HttpClient) { }
 
   getProviders(): Observable<Provider[]>{
     return this.http.get<Provider[]>(this._url)
-    .pipe(catchError(this.errorHandler));
+  }
+  
+  getProviderById(id: number): Observable<Provider>{
+    return this.http.get<Provider>(`${this._url}/${id}`)
   }
 
-  errorHandler(error: HttpErrorResponse){
-    return throwError(error.message || "Server Error");
+  addProvider(provider: Provider):Observable<Provider>{
+    return this.http.post<Provider>(this._url, provider)
+  }
+  
+  updateProvider(id: number, provider: FormGroup):Observable<Provider>{
+    return this.http.put<Provider>(`${this._url}/${id}`, provider)
+  }
+
+  deleteProvider(id: number):Observable<Provider>{
+    return this.http.delete<Provider>(`${this._url}/${id}`)
   }
 }

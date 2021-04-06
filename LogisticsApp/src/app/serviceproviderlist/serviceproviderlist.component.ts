@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SpService } from '../services/sp.service'
 import Swal from 'sweetalert2';
 import { SpService } from '../services/sp.service';
 
@@ -9,55 +10,42 @@ import { SpService } from '../services/sp.service';
   styleUrls: ['./serviceproviderlist.component.css']
 })
 export class ServiceproviderlistComponent implements OnInit {
+  serviceproviders=[];
 
-  serviceproviders: any=[];
-  errorMsg: any;
-  constructor(private router: Router,
-              private spservice: SpService) { }
+  constructor(private spService: SpService) { }
 
   ngOnInit(): void {
-    this.spservice.getProviders().subscribe(
-      (data) => this.serviceproviders = data,
-      (error) => this.errorMsg = error,
+    this.spService.getProviders().subscribe(
+      (data) =>{
+        this.serviceproviders = data['data']['rows']
+        console.log(this.serviceproviders)
+      }
     )
   }
 
-  onSelect(sp: any){
-    this.router.navigate(['/serviceproviderdetail/']);//, sp.provider_id
-  }
-
-  editSP(sp: any){
-    this.router.navigate(['/editserviceprovider', sp.provider_id]);
-  }
-
-  deleteEmployee(sp: any){
-    
-  }
-
-  openSweetAlert(employee:any){
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You will not be able to recover this imaginary file!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it'
-    }).then((result) => {
-      if (result.value) {
-        this.deleteEmployee(employee);
-        Swal.fire(
-          'Deleted!',
-          'Your imaginary file has been deleted.',
-          'success'
-        )
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Your imaginary file is safe :)',
-          'error'
-        )
-      }
-    })
-  }
+  // openSweetAlert(employee:any){
+  //   Swal.fire({
+  //     title: 'Are you sure?',
+  //     text: 'You will not be able to recover this imaginary file!',
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Yes, delete it!',
+  //     cancelButtonText: 'No, keep it'
+  //   }).then((result) => {
+  //     if (result.value) {
+  //       Swal.fire(
+  //         'Deleted!',
+  //         'Your imaginary file has been deleted.',
+  //         'success'
+  //       )
+  //     } else if (result.dismiss === Swal.DismissReason.cancel) {
+  //       Swal.fire(
+  //         'Cancelled',
+  //         'Your imaginary file is safe :)',
+  //         'error'
+  //       )
+  //     }
+  //   })
+  // }
 
 }
