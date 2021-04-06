@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SpService } from '../services/sp.service'
 import Swal from 'sweetalert2';
+import { SessionHandlerService } from '../services/session-handler.service';
 
 @Component({
   selector: 'app-serviceproviderlist',
@@ -11,9 +12,14 @@ import Swal from 'sweetalert2';
 export class ServiceproviderlistComponent implements OnInit {
   serviceproviders=[];
 
-  constructor(private spService: SpService) { }
+  constructor(private spService: SpService, private router: Router) { }
 
   ngOnInit(): void {
+    if(!SessionHandlerService.CheckSession())
+      {
+        this.router.navigate(['/login'])
+      }
+
     this.spService.getProviders().subscribe(
       (data) =>{
         this.serviceproviders = data['data']['rows']
