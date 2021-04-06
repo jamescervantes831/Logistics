@@ -15,11 +15,12 @@ export class ServiceproviderdetailComponent implements OnInit {
     private _ActivatedRoute: ActivatedRoute,
     private fb: FormBuilder) { }
 
-  public sp: any = {} 
+  public sp: any = {}
   public id: number
   public activatedForm: boolean = false
 
   public providerForm = this.fb.group({
+    providerid: [''], // <-- This is a hidden field used just to pass the id
     manager: ['', [Validators.required]],
     name: ['', [Validators.required]],
     address_1: ['', [Validators.required]],
@@ -28,7 +29,7 @@ export class ServiceproviderdetailComponent implements OnInit {
     state: ['', [Validators.required]],
     zip: [0, [Validators.required]],
     country: ['', [Validators.required]]
-  }) 
+  })
 
   ngOnInit(): void {
     this._ActivatedRoute.paramMap.subscribe((params: ParamMap) =>{
@@ -66,12 +67,12 @@ export class ServiceproviderdetailComponent implements OnInit {
       ()    => this.router.navigate(['/serviceproviderlist'])
     )
   }
-  
+
   goBack(){
     this.router.navigate(["/serviceproviderlist"]);
   }
   edit(){
-    if(this.activatedForm) 
+    if(this.activatedForm)
       this.activatedForm = false
     else
       this.activatedForm = true;

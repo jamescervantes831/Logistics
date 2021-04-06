@@ -1,4 +1,5 @@
 export interface Provider{
+    providerid: number,
     manager: string,
     name: string,
     address_1: string,

@@ -32,7 +32,7 @@ module.exports = {
     },
     getContactById: (req, res) => {
         getContactQuery = `SELECT * FROM contacts
-                            WHERE contactid = '${req.params.contactid}';`;
+                            WHERE contactid = ${req.params.contactid};`;
         runQuery(getContactQuery,
             (err, result) => {
                 if (err) {
@@ -94,7 +94,7 @@ module.exports = {
                                     fax = '${req.body.fax}',
                                     toll_free = '${req.body.toll_free}',
                                     email = '${req.body.email}'
-                                WHERE contactid = '${req.params.contactid}';`;
+                                WHERE contactid = ${req.params.contactid};`;
         console.log(updateProviderQuery);
         runQuery(updateProviderQuery,
             (err, result) => {
@@ -111,7 +111,7 @@ module.exports = {
 
     deleteContact: (req, res) => {
         deleteContactQuery = `DELETE FROM contacts
-                                WHERE contactid = '${req.params.contactid}';`
+                                WHERE contactid = ${req.params.contactid};`
 
         runQuery(deleteContactQuery,
             (err, result) => {
