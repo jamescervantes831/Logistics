@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { GetuserinfoService } from '../services/getuserinfo.service';
+import { SessionHandlerService } from '../services/session-handler.service';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +11,10 @@ import { GetuserinfoService } from '../services/getuserinfo.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, 
+  constructor(private router: Router,
     private fb: FormBuilder,
     private userService: GetuserinfoService) { }
-  
+
   public loginForm: FormGroup = this.fb.group({
     userid: ['', [Validators.required, Validators.minLength(3)] ],
     password: ['', [Validators.required, Validators.minLength(3)] ]
@@ -31,8 +32,10 @@ export class LoginComponent implements OnInit {
         usersInfo = data["data"].rows
             for(let user of usersInfo){
               if(user.userid === userid && user.password === password){
-                console.log('MATCH') 
-                this.navigateToHome()
+                console.log('MATCH')
+                // update localstorage
+                SessionHandlerService.SetSession(userid);
+                return this.navigateToHome()
               }
             }
       },
