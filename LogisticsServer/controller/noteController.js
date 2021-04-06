@@ -87,7 +87,7 @@ module.exports = {
                 (err, result) => {
                     if (err) return res.json(err);
 
-                    result.push(result);
+                    results.push(result);
                 }
             )
 
