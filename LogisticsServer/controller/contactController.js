@@ -89,14 +89,15 @@ module.exports = {
                                     titleid = (SELECT titleid FROM titles WHERE titleid = '${req.body.titleid}'),
                                     first_name = '${req.body.first_name}',
                                     last_name = '${req.body.last_name}',
-                                    mobile_num = '${req.body.mobile_number}',
+                                    mobile_number = '${req.body.mobile_number}',
                                     office_phone = '${req.body.office_phone}',
                                     fax = '${req.body.fax}',
                                     toll_free = '${req.body.toll_free}',
-                                    email = '${req.body.email}'
+                                    email = '${req.body.email}',
+                                    providerid = (SELECT providerid FROM service_providers WHERE providerid = '${req.params.providerid}')
                                 WHERE contactid = '${req.params.contactid}';`;
-        console.log(updateProviderQuery);
-        runQuery(updateProviderQuery,
+        console.log(updateContactQuery);
+        runQuery(updateContactQuery,
             (err, result) => {
                 if (err) {
                     console.log(err)
