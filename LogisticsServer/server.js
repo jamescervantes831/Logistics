@@ -1,6 +1,5 @@
 "use strict";
 exports.__esModule = true;
-
 var express = require('express');
 var app = express();
 
@@ -8,7 +7,7 @@ var cors = require('cors');
 
 
 var providerRouter = require('./router/providerRouter');
-var contactRouter = require('./router/contactRouter'); 
+var contactRouter = require('./router/contactRouter');
 var noteRouter = require('./router/noteRouter');
 var userRouter = require('./router/userRouter');
 var titleRouter = require('./router/titleRouter');
@@ -23,7 +22,6 @@ app.use('/contacts', contactRouter); // accesses the contacts table -- potential
 app.use('/notes', noteRouter); // accesses the notes table -- potentiall extend to /notes/:providerid for contacts for specificy provider and /notes/:providerid/:noteid for specific note
 app.use('/users', userRouter); // accesses authentication table -- potentially extend to /users/:userid for provider
 app.use('/titles', titleRouter);
-
 
 // start listening on port 5433
 var server = app.listen(5433, () => {

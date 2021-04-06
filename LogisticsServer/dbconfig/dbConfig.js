@@ -1,12 +1,12 @@
 const Pool = require('pg').Pool
 
 const pool = new Pool({
-    user: "logisticsapp@logistics-db",
-    host: "logistics-db.postgres.database.azure.com",
-    database: "logisticsdb",
-    password: "brightrace",
-    port: "5432",
-    ssl: true
-})
+    user: process.env.DB_USERID,
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+    ssl: process.env.DB_SSL
+});
 
 module.exports = pool;
