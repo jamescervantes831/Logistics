@@ -11,13 +11,15 @@ import { HomeComponent } from './home/home.component';
 import { ServiceproviderlistComponent } from './serviceproviderlist/serviceproviderlist.component';
 import { ServiceproviderdetailComponent } from './serviceproviderdetail/serviceproviderdetail.component';
 import { AddserviceproviderComponent } from './addserviceprovider/addserviceprovider.component';
-import { AddcontractComponent } from './addcontract/addcontract.component';
-import { EditcontractComponent } from './editcontract/editcontract.component';
+import { AddcontactComponent } from './addcontact/addcontact.component';
+import { EditcontactComponent } from './editcontact/editcontact.component';
 import { AddnoteComponent } from './addnote/addnote.component';
 import { EditnoteComponent } from './editnote/editnote.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpErrorInterceptor } from './http-error.interceptor';
+import { ContactsComponent } from './contacts/contacts.component';
+import { NotesComponent } from './notes/notes.component';
 
 @NgModule({
   declarations: [
@@ -30,11 +32,13 @@ import { HttpErrorInterceptor } from './http-error.interceptor';
     ServiceproviderlistComponent,
     ServiceproviderdetailComponent,
     AddserviceproviderComponent,
-    AddcontractComponent,
-    EditcontractComponent,
+    AddcontactComponent,
+    EditcontactComponent,
     AddnoteComponent,
     EditnoteComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    ContactsComponent,
+    NotesComponent
   ],
   imports: [
     BrowserModule,

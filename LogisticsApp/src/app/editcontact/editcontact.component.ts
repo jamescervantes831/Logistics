@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-editcontract',
-  templateUrl: './editcontract.component.html',
-  styleUrls: ['./editcontract.component.css']
+  templateUrl: './editcontact.component.html',
+  styleUrls: ['./editcontact.component.css']
 })
-export class EditcontractComponent implements OnInit {
+export class EditcontactComponent implements OnInit {
 
   constructor() { }
 
