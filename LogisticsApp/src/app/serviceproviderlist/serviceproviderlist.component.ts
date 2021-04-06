@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SpService } from '../services/sp.service'
 import Swal from 'sweetalert2';
+import { SpService } from '../services/sp.service';
 
 @Component({
   selector: 'app-serviceproviderlist',
@@ -9,7 +10,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./serviceproviderlist.component.css']
 })
 export class ServiceproviderlistComponent implements OnInit {
-
   serviceproviders=[];
 
   constructor(private spService: SpService) { }

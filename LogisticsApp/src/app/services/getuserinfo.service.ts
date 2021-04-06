@@ -10,10 +10,23 @@ export class GetuserinfoService {
   private _url: string = 'http://localhost:5433/users';
   
   constructor(private http: HttpClient) { }
-
   getCustomers(): Observable<Customer> {
     return this.http.get<Customer>(this._url)
+
   }
+
+  // getCustomers(): Observable<Customer> {
+  //   return this.http.get<Customer>(this._url,
+  //     {
+  //       headers: new HttpHeaders({
+  //         'Access-Control-Allow-Origin': `${this._url}`
+  //       })
+  //     }
+  //     )
+  //   .pipe(
+  //     catchError(this.errorHandler)
+  //     );
+  // }
 
   getCustomersById(userid: string) : Observable<Customer>{
     return this.http.get<Customer>(`${this._url}/${userid}`)

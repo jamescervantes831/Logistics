@@ -4,6 +4,7 @@ import { Provider } from '../module/provider'
 import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,5 +31,4 @@ export class SpService {
   deleteProvider(id: number):Observable<Provider>{
     return this.http.delete<Provider>(`${this._url}/${id}`)
   }
-
 }
