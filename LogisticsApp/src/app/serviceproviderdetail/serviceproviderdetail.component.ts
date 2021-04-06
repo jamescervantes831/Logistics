@@ -56,6 +56,16 @@ export class ServiceproviderdetailComponent implements OnInit {
       }
     )
   }
+
+  del(){
+    this.spService.deleteProvider(this.id).subscribe(
+      (data) =>{
+        console.log(data)
+      },
+      error => console.log(error),
+      ()    => this.router.navigate(['/serviceproviderlist'])
+    )
+  }
   
   goBack(){
     this.router.navigate(["/serviceproviderlist"]);

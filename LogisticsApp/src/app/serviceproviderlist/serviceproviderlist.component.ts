@@ -12,8 +12,7 @@ export class ServiceproviderlistComponent implements OnInit {
 
   serviceproviders=[];
 
-  constructor(private router: Router,
-    private spService: SpService) { }
+  constructor(private spService: SpService) { }
 
   ngOnInit(): void {
     this.spService.getProviders().subscribe(
