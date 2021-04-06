@@ -16,47 +16,37 @@ export class ServiceproviderlistComponent implements OnInit {
     private spService: SpService) { }
 
   ngOnInit(): void {
-    this.serviceproviders = [
-      {"provider_id": 1200, "manager": "william", "name": "David", "address_1": "51 forest", "address_2": "52 forest", "city": "piscataway", "state": "NJ", "zip": "08854", "country": "USA"}
-    ];
-  }
-
-  onSelect(sp: any){
-    this.router.navigate(['/serviceproviderdetail/']);//, sp.provider_id
-  }
-
-  editSP(sp: any){
-    this.router.navigate(['/editserviceprovider']);
-  }
-
-  deleteEmployee(sp: any){
-    
-  }
-
-  openSweetAlert(employee:any){
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You will not be able to recover this imaginary file!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it'
-    }).then((result) => {
-      if (result.value) {
-        this.deleteEmployee(employee);
-        Swal.fire(
-          'Deleted!',
-          'Your imaginary file has been deleted.',
-          'success'
-        )
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Your imaginary file is safe :)',
-          'error'
-        )
+    this.spService.getProviders().subscribe(
+      (data) =>{
+        this.serviceproviders = data['data']['rows']
+        console.log(this.serviceproviders)
       }
-    })
+    )
   }
+
+  // openSweetAlert(employee:any){
+  //   Swal.fire({
+  //     title: 'Are you sure?',
+  //     text: 'You will not be able to recover this imaginary file!',
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Yes, delete it!',
+  //     cancelButtonText: 'No, keep it'
+  //   }).then((result) => {
+  //     if (result.value) {
+  //       Swal.fire(
+  //         'Deleted!',
+  //         'Your imaginary file has been deleted.',
+  //         'success'
+  //       )
+  //     } else if (result.dismiss === Swal.DismissReason.cancel) {
+  //       Swal.fire(
+  //         'Cancelled',
+  //         'Your imaginary file is safe :)',
+  //         'error'
+  //       )
+  //     }
+  //   })
+  // }
 
 }
