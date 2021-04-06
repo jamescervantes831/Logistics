@@ -22,7 +22,7 @@ module.exports = {
     getProvider: (req, res) => {
 
         getProviderQuery = `SELECT * FROM service_providers
-            WHERE providerid='${req.params.providerid}';`;
+            WHERE providerid= ${req.params.providerid};`;
 
         runQuery(getProviderQuery,
             (err, result) => {
@@ -49,9 +49,9 @@ module.exports = {
                             '${req.body.zip}',
                             '${req.body.country}')`;
         console.log(addProviderQuery);
-        runQuery(addProviderQuery, 
+        runQuery(addProviderQuery,
             (err, result) => {
-                if (err){
+                if (err) {
                     // console.log(err)
                     return;
                 }
@@ -73,11 +73,11 @@ module.exports = {
                                     state = '${req.body.state}',
                                     zip = '${req.body.zip}',
                                     country = '${req.body.country}'
-                                WHERE providerid = '${req.params.providerid}';`;
+                                WHERE providerid = ${req.params.providerid};`;
         console.log(updateProviderQuery);
-        runQuery(updateProviderQuery, 
+        runQuery(updateProviderQuery,
             (err, result) => {
-                if(err){
+                if (err) {
                     console.log(err)
                     return;
                 }
@@ -91,9 +91,9 @@ module.exports = {
 
     deleteProvider: (req, res) => {
         deleteProviderQuery = `DELETE FROM service_providers
-                                WHERE providerid = '${req.params.providerid}';`
-        
-        runQuery(deleteProviderQuery, 
+                                WHERE providerid = ${req.params.providerid};`
+
+        runQuery(deleteProviderQuery,
             (err, result) => {
                 if (err) {
                     console.log(err);
