@@ -18,7 +18,6 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'serviceproviderlist', component: ServiceproviderlistComponent},
   { path: 'serviceproviderdetail/:providerid', component: ServiceproviderdetailComponent},
-  { path: 'editserviceprovider', component: EditserviceproviderComponent},
   { path: 'addserviceprovider', component: AddserviceproviderComponent},
   { path: 'forgotpassword', component: ForgotpasswordComponent},
   { path: 'loginfail', component: LoginfailComponent },
