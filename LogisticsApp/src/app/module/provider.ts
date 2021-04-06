@@ -7,3 +7,4 @@ export interface Provider{
     state: string,
     zip: number,
     country: string
+}
