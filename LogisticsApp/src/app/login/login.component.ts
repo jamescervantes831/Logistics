@@ -22,27 +22,26 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {  }
 
   onSubmit(loginForm: FormGroup): void{
-    let usersInfo
+    let usersInfo: any;
     let userid = loginForm.value.userid
     let password = loginForm.value.password
     this.userService.getCustomers()
     .subscribe(
       (data) => {
         usersInfo = data["data"].rows
+            for(let user of usersInfo){
+              if(user.userid === userid && user.password === password){
+                console.log('MATCH') 
+                this.navigateToHome()
+              }
+            }
       },
       (error) => console.log(`ERROR: ${error}`)
     )
-
-    // for(let user of usersInfo){
-    //   if(userid === usersInfo[user].userid && 
-    //     password === usersInfo[user].password){
-    //       this.navigateToHome()
-    //   }
-    // }
   }
 
   navigateToHome(){
-    this.router.navigate(["/home/"]);
+    return this.router.navigate(['/home']);
   }
   navigateToForgotPassword(){
     this.router.navigate(["/forgotpassword/"]);
