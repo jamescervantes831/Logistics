@@ -3,14 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Provider } from '../module/provider'
 import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
-
+import { URLService } from '../services/url.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpService {
-  private _url: string = 'http://localhost:5433/providers';
-  constructor(private http: HttpClient) { }
+  private _url: string = this.urlService.getSP_URL();
+  constructor(private http: HttpClient,
+    private urlService: URLService) { }
 
   getProviders(): Observable<Provider[]>{
     return this.http.get<Provider[]>(this._url)

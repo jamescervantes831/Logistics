@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddserviceproviderComponent } from './addserviceprovider/addserviceprovider.component';
-import { EditserviceproviderComponent } from './editserviceprovider/editserviceprovider.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';

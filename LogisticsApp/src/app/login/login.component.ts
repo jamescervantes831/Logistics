@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { GetuserinfoService } from '../services/getuserinfo.service';
 
 @Component({
