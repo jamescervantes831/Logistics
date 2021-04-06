@@ -5,7 +5,7 @@ module.exports = {
         getAllContactsQuery = `SELECT * FROM contacts`;
 
         runQuery(getAllContactsQuery,
-            (err, result) =>{
+            (err, result) => {
                 if (err) {
                     console.log(err)
                     return;
@@ -16,12 +16,26 @@ module.exports = {
                 })
             });
     },
+    getContactsByProvider: (req, res) => {
+        getContactQuery = `SELECT * FROM contacts
+                            WHERE providerid = '${req.params.providerid}';`;
+        runQuery(getContactQuery,
+            (err, result) => {
+                if (err) {
+                    console.log(err)
+                    return;
+                }
+                return res.status(200).json({
+                    data: result
+                })
+            });
+    },
     getContactById: (req, res) => {
         getContactQuery = `SELECT * FROM contacts
                             WHERE contactid = '${req.params.contactid}';`;
-        runQuery(getContactQuery, 
+        runQuery(getContactQuery,
             (err, result) => {
-                if(err) {
+                if (err) {
                     console.log(err)
                     return;
                 }
@@ -55,12 +69,12 @@ module.exports = {
 
         runQuery(addContactQuery,
             (err, result) => {
-                if(err){
+                if (err) {
                     console.log(err);
                     return res.json({
                         message: "Error is Occured",
                         data: err
-                    });             
+                    });
                 }
                 return res.status(200).json({
                     message: "Contact is added",
@@ -82,9 +96,9 @@ module.exports = {
                                     email = '${req.body.email}'
                                 WHERE contactid = '${req.params.contactid}';`;
         console.log(updateProviderQuery);
-        runQuery(updateProviderQuery, 
+        runQuery(updateProviderQuery,
             (err, result) => {
-                if(err){
+                if (err) {
                     console.log(err)
                     return;
                 }
@@ -98,8 +112,8 @@ module.exports = {
     deleteContact: (req, res) => {
         deleteContactQuery = `DELETE FROM contacts
                                 WHERE contactid = '${req.params.contactid}';`
-        
-        runQuery(deleteContactQuery, 
+
+        runQuery(deleteContactQuery,
             (err, result) => {
                 if (err) {
                     console.log(err);
