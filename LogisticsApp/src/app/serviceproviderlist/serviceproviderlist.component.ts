@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SpService } from '../services/sp.service'
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,7 +12,8 @@ export class ServiceproviderlistComponent implements OnInit {
 
   serviceproviders=[];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private spService: SpService) { }
 
   ngOnInit(): void {
     this.serviceproviders = [
@@ -24,7 +26,7 @@ export class ServiceproviderlistComponent implements OnInit {
   }
 
   editSP(sp: any){
-    this.router.navigate(['/editserviceprovider', sp.provider_id]);
+    this.router.navigate(['/editserviceprovider']);
   }
 
   deleteEmployee(sp: any){

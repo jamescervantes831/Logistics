@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Customer } from '../module/customer';
+import { ErrorHandler } from '../module/errorHandling'
 import { Observable, throwError } from 'rxjs';
 import { catchError} from 'rxjs/operators';
 
@@ -10,29 +11,18 @@ import { catchError} from 'rxjs/operators';
 export class GetuserinfoService {
   private _url: string = 'http://localhost:5433/users';
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private errHandler: ErrorHandler) { }
 
   getCustomers(): Observable<Customer> {
-    return this.http.get<Customer>(this._url,
-      {
-        headers: new HttpHeaders({
-          'Access-Control-Allow-Origin': `${this._url}`
-        })
-      }
-      )
+    return this.http.get<Customer>(this._url)
     .pipe(
       catchError(this.errorHandler)
       );
   }
 
   getCustomersById(userid: string) : Observable<Customer>{
-    return this.http.get<Customer>(`${this._url}/${userid}`,
-    {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': `${this._url}`
-      })
-    }
-    ,)
+    return this.http.get<Customer>(`${this._url}/${userid}`)
     .pipe(
       catchError(this.errorHandler)
       );
@@ -60,7 +50,7 @@ export class GetuserinfoService {
   }
 
   errorHandler(error: HttpErrorResponse){
-    return throwError(error.message || "Server Error");
+    return this.errHandler.errorHandler(error)
   }
 
   getURL(){
