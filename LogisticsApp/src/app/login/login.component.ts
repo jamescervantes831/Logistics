@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { GetuserinfoService } from '../services/getuserinfo.service';
+import { SpService } from '../services/sp.service'
 import { SessionHandlerService } from '../services/session-handler.service';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router,
     private fb: FormBuilder,
-    private userService: GetuserinfoService) { }
+    private userService: GetuserinfoService,
+    private spService: SpService) { }
 
   public loginForm: FormGroup = this.fb.group({
     userid: ['', [Validators.required, Validators.minLength(3)] ],
@@ -39,6 +42,7 @@ export class LoginComponent implements OnInit {
                 console.log('MATCH')
                 // update localstorage
                 SessionHandlerService.SetSession(userid);
+                this.spService.setUserID(userid)
                 return this.navigateToHome()
               }
       },
@@ -50,7 +54,7 @@ export class LoginComponent implements OnInit {
     return this.router.navigate(['/home']);
   }
   navigateToForgotPassword(){
-    this.router.navigate(["/forgotpassword/"]);
+    this.router.navigate(["/forgotpassword"]);
   }
 
   get id() {

@@ -24,7 +24,7 @@
         <td>{{sp.state}}</td>
         <td>{{sp.zip}}</td>
         <td>{{sp.country}}</td>
-        <td><button type="button" class="btn btn-primary" [routerLink]="['/serviceproviderdetail/', sp.providerid]">View</button></td>
+        <td><button type="button" class="btn btn-primary"  (click)="setProviderID(sp.providerid)" [routerLink]="['/serviceproviderdetail']">View</button></td>
       </tr>
     </tbody>
   </table>  

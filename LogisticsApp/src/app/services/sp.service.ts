@@ -10,15 +10,17 @@ import { URLService } from '../services/url.service'
 })
 export class SpService {
   private _url: string = this.urlService.getSP_URL();
+  private userid: string;
+  private providerid:number
   constructor(private http: HttpClient,
     private urlService: URLService) { }
 
-  getProviders(): Observable<Provider[]>{
-    return this.http.get<Provider[]>(this._url)
+  getProvidersByUserId(userid: string): Observable<Provider[]>{
+    return this.http.get<Provider[]>(`${this._url}/${userid}`)
   }
   
-  getProviderById(id: number): Observable<Provider>{
-    return this.http.get<Provider>(`${this._url}/${id}`)
+  getProviderById(id: number, userid: string): Observable<Provider>{
+    return this.http.get<Provider>(`${this._url}/${userid}/${id}`)
   }
 
   addProvider(provider: Provider):Observable<Provider>{
@@ -31,5 +33,18 @@ export class SpService {
 
   deleteProvider(id: number):Observable<Provider>{
     return this.http.delete<Provider>(`${this._url}/${id}`)
+  }
+
+  setProviderID(providerid: number):void{
+    this.providerid = providerid
+  }
+  getProviderID():number{
+    return this.providerid
+  }
+  setUserID(userid: string):void{
+    this.userid = userid
+  }
+  getUserID(): string{
+    return this.userid
   }
 }
