@@ -1,0 +1,23 @@
+.nav_title_button {
+    border: none;
+    background: none;
+    font-weight: bold;
+    color: white;
+    font-size: large;
+    min-height: 40px;
+}
+
+.nav_item_button {
+    border: none;
+    background: none;
+    color: grey;
+    min-height: 40px;
+}
+
+.nav_title_button:hover {
+    font-size: larger;
+}
+
+.nav_item_button:hover {
+    color: white;
+}

@@ -87,10 +87,11 @@ module.exports = {
                     })
                 })
 
+        } else {
+            return res.status(404).json({
+                message: "Undefined field detected"
+            })
         }
-        return res.status(404).json({
-            message: "Undefined field detected"
-        })
 
     },
 
@@ -102,7 +103,7 @@ module.exports = {
             req.body.state != undefined &&
             req.body.zip != undefined &&
             req.body.country != undefined) {
-                updateProviderQuery = `UPDATE service_providers
+            updateProviderQuery = `UPDATE service_providers
                                         SET
                                             manager = (SELECT userid FROM authentication WHERE userid = '${req.body.manager}'),
                                             name = '${req.body.name}',
@@ -113,21 +114,22 @@ module.exports = {
                                             zip = '${req.body.zip}',
                                             country = '${req.body.country}'
                                         WHERE providerid = ${req.params.providerid};`;
-                        runQuery(updateProviderQuery,
-                        (err, result) => {
-                        if (err) {
-                            return res.json(err);
-                        }
-                        return res.status(200).json({
-                            message: `Service Provider of ID: ${req.body.providerid} is updated`,
-                            data: result
-                        })
-                        });
+            runQuery(updateProviderQuery,
+                (err, result) => {
+                    if (err) {
+                        return res.json(err);
+                    }
+                    return res.status(200).json({
+                        message: `Service Provider of ID: ${req.body.providerid} is updated`,
+                        data: result
+                    })
+                });
 
-            }
+        } else {
             return res.status(404).json({
                 message: "Undefined field detected"
             })
+        }
     },
 
     deleteProvider: (req, res) => {
