@@ -37,6 +37,11 @@ module.exports = {
     },
 
     AddUser: (req, res) => {
+        if (req.body.userid == undefined || req.body.password == undefined) {
+            return res.status(400).json({
+                message: "One or more required parameters are undefined"
+            })
+        }
         queryString =
             `INSERT INTO authentication (userid, password)
             VALUES ('${req.body.userid}', '${req.body.password}');`;
@@ -52,6 +57,11 @@ module.exports = {
         )
     },
     DeleteUser: (req, res) => {
+        if (req.params.userid == undefined) {
+            return res.status(400).json({
+                message: "userid is undefined."
+            })
+        }
         queryString =
             `DELETE FROM authentication
             WHERE userid = '${req.params.userid}';`
@@ -72,6 +82,12 @@ module.exports = {
     },
 
     ChangeUserPassword: (req, res) => {
+        if (req.params.userid == undefined) {
+            return res.status(400).json({ message: "userid is undefined" })
+        }
+        if (req.body.password == undefined) {
+            return res.status(400).json({ message: "password is undefined" })
+        }
         queryString =
             `UPDATE authentication
             SET password = '${req.body.password}'

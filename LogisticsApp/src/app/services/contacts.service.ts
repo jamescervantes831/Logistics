@@ -11,7 +11,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class ContactsService {
 
-  private _url: string = this.urlService.getContacts_URL(); 
+  private _url: string = this.urlService.getContacts_URL();
   constructor( private http: HttpClient,
     private urlService: URLService,
     private spService: SpService) { }
@@ -22,7 +22,7 @@ export class ContactsService {
   getContactById(providerid: number, contactid: number):Observable<Contact[]>{
     return this.http.get<Contact[]>(`${this._url}/${providerid}/${contactid}`)
   }
-  updateContact(providerid: number, contactid: number, contactForm: FormGroup):Observable<Contact>{
+  updateContact(providerid: number, contactid: number, contactForm: any):Observable<Contact>{
     return this.http.put<Contact>(`${this._url}/${providerid}/${contactid}`, contactForm)
   }
   deleteContact(providerid: number, contactid: number):Observable<Contact>{

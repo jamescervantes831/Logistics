@@ -34,7 +34,7 @@ module.exports = {
         runQuery(getContactQuery,
             (err, result) => {
                 if (err) {
-                    return res.json(err); 
+                    return res.json(err);
                 }
                 return res.status(200).json({
                     data: result
@@ -47,7 +47,7 @@ module.exports = {
             req.body.titleid != undefined &&
             req.body.first_name != undefined &&
             req.body.last_name != undefined &&
-            req.body.email != undefined 
+            req.body.email != undefined
 
         ) {
             addContactQuery = `INSERT INTO contacts(
@@ -71,8 +71,8 @@ module.exports = {
                                     '${req.body.email}',
                                     (SELECT providerid FROM service_providers WHERE providerid = '${req.params.providerid}'))`;
 
-                runQuery(addContactQuery,
-                    (err, result) => {
+            runQuery(addContactQuery,
+                (err, result) => {
                     if (err) {
                         return res.json(err);
                     }
@@ -80,7 +80,7 @@ module.exports = {
                         message: "Contact is added",
                         data: result
                     });
-                });  
+                });
         }
         return res.status(404).json({
             message: "Undefined field detected"
@@ -93,7 +93,7 @@ module.exports = {
             req.body.titleid != undefined &&
             req.body.first_name != undefined &&
             req.body.last_name != undefined &&
-            req.body.email != undefined 
+            req.body.email != undefined
 
         ) {
             updateContactQuery = `UPDATE contacts
@@ -101,28 +101,28 @@ module.exports = {
                                         titleid = (SELECT titleid FROM titles WHERE titleid = '${req.body.titleid}'),
                                         first_name = '${req.body.first_name}',
                                         last_name = '${req.body.last_name}',
-                                        mobile_num = '${req.body.mobile_number}',
+                                        mobile_number = '${req.body.mobile_number}',
                                         office_phone = '${req.body.office_phone}',
                                         fax = '${req.body.fax}',
                                         toll_free = '${req.body.toll_free}',
                                         email = '${req.body.email}'
                                     WHERE contactid = ${req.params.contactid};`;
 
-                runQuery(updateProviderQuery,
-                    (err, result) => {
-                        if (err) {
-                            return res.json(err);
-                        }
-                        return res.status(200).json({
-                            message: `Service Provider of ID: ${req.body.providerid} is updated`,
-                            data: result
-                        })
-                    });
-            }
+            runQuery(updateContactQuery,
+                (err, result) => {
+                    if (err) {
+                        return res.json(err);
+                    }
+                    return res.status(200).json({
+                        message: `Service Provider of ID: ${req.body.providerid} is updated`,
+                        data: result
+                    })
+                });
+        } else {
             return res.status(404).json({
                 message: "Undefined field detected"
             })
-        
+        }
     },
 
     deleteContact: (req, res) => {
