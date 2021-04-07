@@ -1,63 +1,62 @@
-<div class="row">
-<div class="col-8">
-    <div *ngIf="sp && !activatedForm, else editForm">
-        <h2 [ngStyle]="{'margin-bottom':'25px'}">Sevice Provider's Detail</h2>
-        <p>Provider_ID: {{sp.providerid}}</p>
-        <p>Manager: {{sp.manager}}</p>
-        <p>Name: {{sp.name}}</p>
-        <p>address_1: {{sp.address_1}}</p>
-        <p>address_2: {{sp.address_2}}</p>
-        <p>city: {{sp.city}}</p>
-        <p>state: {{sp.state}}</p>
-        <p>zip: {{sp.zip}}</p>
-        <p>country: {{sp.country}}</p>
-        <button type="button" class="btn btn-warning" (click)="goBack()">Go Back</button>
-        <button type="button" class="btn btn-success mx-1" (click)="edit()">Edit</button>
-        <button type="button" class="btn btn-danger" (click)="del()">Delete</button>
-    </div>
-    
-    <ng-template #editForm>
-        <form [formGroup]="providerForm" (ngSubmit)="onSubmit()" method="POST">
-            <input type="hidden" class="form-control" formControlName="providerid">
-    
-            <label for="manager"><b>Manager</b></label>
-            <input type="text" class="form-control" formControlName="manager" disabled>
-    
-            <label for="name"><b>Name</b></label>
-            <input type="text" formControlName="name" class="form-control">
-    
-            <label for="address_1"><b>Address_1</b></label>
-            <input type="text" formControlName="address_1" class="form-control">
-    
-            <label for="address_2"><b>Address_2</b></label>
-            <input type="text" formControlName="address_2" class="form-control">
-    
-            <label for="city"><b>City</b></label>
-            <input type="text" formControlName="city" class="form-control">
-    
-            <label for="state"><b>State</b></label>
-            <input type="text" formControlName="state" class="form-control">
-    
-            <label for="zip"><b>Zip</b></label>
-            <input type="number" formControlName="zip" class="form-control">
-    
-            <label for="country"><b>Country</b></label>
-            <input type="text" formControlName="country" class="form-control">
-    
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="button" class="btn btn-danger" (click)="edit()">Cancel</button>
-        </form>
-    </ng-template>
-</div>
-<div class="col-4">
-    <div class="row">
-        <div class="col-12">
-            <app-contacts [providerid] ="providerid"></app-contacts>
+<div class="content">
+    <div id="provider_details" class="col-8">
+        <div id="provider_form" *ngIf="sp && !activatedForm, else editForm">
+            <h2 [ngStyle]="{'margin-bottom':'25px'}">Sevice Provider's Detail</h2>
+            <p>Provider_ID: {{sp.providerid}}</p>
+            <p>Manager: {{sp.manager}}</p>
+            <p>Name: {{sp.name}}</p>
+            <p>address_1: {{sp.address_1}}</p>
+            <p>address_2: {{sp.address_2}}</p>
+            <p>city: {{sp.city}}</p>
+            <p>state: {{sp.state}}</p>
+            <p>zip: {{sp.zip}}</p>
+            <p>country: {{sp.country}}</p>
+            <button type="button" class="btn btn-warning" (click)="goBack()">Go Back</button>
+            <button type="button" class="btn btn-success mx-1" (click)="edit()">Edit</button>
+            <button type="button" class="btn btn-danger" (click)="del()">Delete</button>
         </div>
-        <div class="col-12">
-            <app-notes [providerid] ="providerid"></app-notes>
-        </div>
-    </div>
-</div>
-</div>
 
+        <ng-template #editForm>
+            <form [formGroup]="providerForm" (ngSubmit)="onSubmit()" method="POST">
+                <input type="hidden" class="form-control" formControlName="providerid">
+
+                <label for="manager"><b>Manager</b></label>
+                <input type="text" class="form-control" formControlName="manager" disabled>
+
+                <label for="name"><b>Name</b></label>
+                <input type="text" formControlName="name" class="form-control">
+
+                <label for="address_1"><b>Address_1</b></label>
+                <input type="text" formControlName="address_1" class="form-control">
+
+                <label for="address_2"><b>Address_2</b></label>
+                <input type="text" formControlName="address_2" class="form-control">
+
+                <label for="city"><b>City</b></label>
+                <input type="text" formControlName="city" class="form-control">
+
+                <label for="state"><b>State</b></label>
+                <input type="text" formControlName="state" class="form-control">
+
+                <label for="zip"><b>Zip</b></label>
+                <input type="number" formControlName="zip" class="form-control">
+
+                <label for="country"><b>Country</b></label>
+                <input type="text" formControlName="country" class="form-control">
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-danger" (click)="edit()">Cancel</button>
+            </form>
+        </ng-template>
+    </div>
+    <div id="provider_linked">
+        <h3>Contacts</h3>
+        <div id="contacts_list">
+            <app-contacts [providerid]="providerid"></app-contacts>
+        </div>
+        <h3>Notes</h3>
+        <div id="notes_list">
+            <app-notes [providerid]="providerid"></app-notes>
+        </div>
+    </div>
+</div>
