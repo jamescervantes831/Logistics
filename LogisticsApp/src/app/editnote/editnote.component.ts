@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms'
+import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { NotesService } from '../services/notes.service';
 @Component({
   selector: 'app-editnote',
@@ -29,7 +29,9 @@ export class EditnoteComponent implements OnInit {
     }
   }
   onSubmit(editContactForm: any){
-    this.notesService.updateNote(this.note['notesid'], this.note['providerid'],editContactForm).subscribe(
+    const noteid = editContactForm.getRawValue().noteid
+    const providerid = editContactForm.getRawValue().providerid
+    this.notesService.updateNote(noteid, providerid,editContactForm.getRawValue()).subscribe(
       data => console.log(data['data']['rows']),
       error => console.log(error.mesage),
       () => console.log("ALLL DONE")

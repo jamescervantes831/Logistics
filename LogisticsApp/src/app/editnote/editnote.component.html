@@ -1,4 +1,4 @@
-<form [formGroup]="noteEditForm" (ngSubmit)="onSubmit(noteEditForm.getRawValue())" method="POST">
+<form [formGroup]="noteEditForm" (ngSubmit)="onSubmit(noteEditForm)" method="POST">
     <input type="hidden" class="form-control" formControlName="providerid">
     <input type="hidden" class="form-control" formControlName="noteid">
 
