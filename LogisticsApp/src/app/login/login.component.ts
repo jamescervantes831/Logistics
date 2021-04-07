@@ -26,18 +26,17 @@ export class LoginComponent implements OnInit {
     let usersInfo: any;
     let userid = loginForm.value.userid
     let password = loginForm.value.password
-    this.userService.getCustomers()
+    this.userService.getCustomersById(userid)
     .subscribe(
       (data) => {
-        usersInfo = data["data"].rows
-            for(let user of usersInfo){
-              if(user.userid === userid && user.password === password){
+        console.log(data)
+        usersInfo = data["data"].rows[0]
+              if(userid === usersInfo.userid && password === usersInfo.password){
                 console.log('MATCH')
                 // update localstorage
                 SessionHandlerService.SetSession(userid);
                 return this.navigateToHome()
               }
-            }
       },
       (error) => console.log(`ERROR: ${error}`)
     )
