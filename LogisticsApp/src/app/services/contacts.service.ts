@@ -28,7 +28,7 @@ export class ContactsService {
   deleteContact(providerid: number, contactid: number):Observable<Contact>{
     return this.http.delete<Contact>(`${this._url}/${providerid}/${contactid}`)
   }
-  postContact(providerid: number, contactForm: Contact):Observable<Contact>{
+  postContact(providerid: number, contactForm: any):Observable<Contact>{
     return this.http.post<Contact>(`${this._url}/${providerid}`, contactForm)
   }
 

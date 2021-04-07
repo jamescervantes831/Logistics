@@ -37,7 +37,7 @@ export class AddcontactComponent implements OnInit {
   onSubmit(contactForm:any){
     this.actRoute.paramMap.subscribe((params: ParamMap) => {
       let pid = Number(params.get('ProviderID'));
-      this.conService.postContact(pid,this.contactForm.value).subscribe(
+      this.conService.postContact(pid,this.contactForm.getRawValue()).subscribe(
       (data) => {
         this.contacts = data; 
         this.conService.getContacts(pid).subscribe(
