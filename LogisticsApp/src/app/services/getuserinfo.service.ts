@@ -11,10 +11,10 @@ export class GetuserinfoService {
   
   constructor(private http: HttpClient,
     private urlService: URLService) { }
-  getCustomers(): Observable<Customer> {
-    return this.http.get<Customer>(this._url)
+  // getCustomers(): Observable<Customer> {
+  //   return this.http.get<Customer>(this._url)
 
-  }
+  // }
 
   getCustomersById(userid: string) : Observable<Customer>{
     return this.http.get<Customer>(`${this._url}/${userid}`)

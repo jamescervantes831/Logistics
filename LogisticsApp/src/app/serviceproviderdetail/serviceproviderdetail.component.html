@@ -15,7 +15,7 @@
 </div>
 
 <ng-template #editForm>
-    <form [formGroup]="providerForm" (ngSubmit)="onSubmit(providerForm)" method="POST">
+    <form [formGroup]="providerForm" (ngSubmit)="onSubmit()" method="POST">
         <input type="hidden" class="form-control" formControlName="providerid">
 
         <label for="manager"><b>Manager</b></label>
