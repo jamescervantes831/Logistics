@@ -18,10 +18,30 @@ module.exports = {
         );
     },
 
+    getProviderByUser: (req, res) => {
+
+        getProviderQuery = `SELECT * FROM service_providers
+            WHERE manager= '${req.params.userid}';`;
+
+        runQuery(getProviderQuery,
+            (err, result) => {
+                if (err) {
+                    console.log(err)
+                    return
+                }
+                return res.status(200).json({
+                    message: "List of Service Provider",
+                    data: result
+                })
+            }
+        );
+    },
+
     getProvider: (req, res) => {
 
         getProviderQuery = `SELECT * FROM service_providers
-            WHERE providerid= ${req.params.providerid};`;
+            WHERE manager = '${req.params.userid}'
+            AND providerid= ${req.params.providerid};`;
 
         runQuery(getProviderQuery,
             (err, result) => {

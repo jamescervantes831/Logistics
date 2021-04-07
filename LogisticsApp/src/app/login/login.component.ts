@@ -20,24 +20,27 @@ export class LoginComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(3)] ]
   });;
 
-  ngOnInit(): void {  }
+  ngOnInit(): void {
+    if(SessionHandlerService.CheckSession()){ // a user is already logged in
+      this.router.navigate(['/home'])
+    }
+   }
 
   onSubmit(loginForm: FormGroup): void{
     let usersInfo: any;
     let userid = loginForm.value.userid
     let password = loginForm.value.password
-    this.userService.getCustomers()
+    this.userService.getCustomersById(userid)
     .subscribe(
       (data) => {
-        usersInfo = data["data"].rows
-            for(let user of usersInfo){
-              if(user.userid === userid && user.password === password){
+        console.log(data)
+        usersInfo = data["data"].rows[0]
+              if(userid === usersInfo.userid && password === usersInfo.password){
                 console.log('MATCH')
                 // update localstorage
                 SessionHandlerService.SetSession(userid);
                 return this.navigateToHome()
               }
-            }
       },
       (error) => console.log(`ERROR: ${error}`)
     )
