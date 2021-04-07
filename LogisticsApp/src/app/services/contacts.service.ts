@@ -3,31 +3,33 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Contact } from '../module/contacts'
 import { URLService } from '../services/url.service'
+import { SpService } from '../services/sp.service'
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactsService {
 
-  private _url: string = this.urlService.getContacts_URL();
-
+  private _url: string = this.urlService.getContacts_URL(); 
   constructor( private http: HttpClient,
-    private urlService: URLService) { }
+    private urlService: URLService,
+    private spService: SpService) { }
 
-  getContacts():Observable<Contact[]>{
-    return this.http.get<Contact[]>(`${this._url}`)
+  getContacts(providerid: number):Observable<Contact[]>{
+    return this.http.get<Contact[]>(`${this._url}/${providerid}`)
   }
-  getContactById(providerid: Number, contactid: Number):Observable<Contact[]>{
-    return this.http.get<Contact[]>(this._url + '/' + providerid + '/'+ contactid)
+  getContactById(providerid: number, contactid: number):Observable<Contact[]>{
+    return this.http.get<Contact[]>(`${this._url}/${providerid}/${contactid}`)
   }
-  updateContact(providerid: Number, contactid: Number, contactForm: any):Observable<Contact[]>{
-    return this.http.put<Contact[]>(this._url + '/' + providerid + '/'+ contactid, contactForm)
+  updateContact(providerid: number, contactid: number, contactForm: FormGroup):Observable<Contact>{
+    return this.http.put<Contact>(`${this._url}/${providerid}/${contactid}`, contactForm)
   }
-  deleteContact(providerid: Number, contactid: Number):Observable<Contact[]>{
-    return this.http.delete<Contact[]>(this._url + '/' + providerid + '/'+ contactid)
+  deleteContact(providerid: number, contactid: number):Observable<Contact>{
+    return this.http.delete<Contact>(`${this._url}/${providerid}/${contactid}`)
   }
-  postContact(providerid: Number, contactForm: any):Observable<Contact[]>{
-    return this.http.post<Contact[]>(this._url + '/' + providerid, contactForm)
+  postContact(providerid: number, contactForm: Contact):Observable<Contact>{
+    return this.http.post<Contact>(`${this._url}/${providerid}`, contactForm)
   }
 
 }

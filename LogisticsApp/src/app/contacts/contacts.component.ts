@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ContactsService } from '../services/contacts.service';
+import { SpService } from '../services/sp.service'
 import Swal from 'sweetalert2';//thrid party library
                               //npm install sweetalert2
                               //before import here
@@ -10,17 +11,28 @@ import Swal from 'sweetalert2';//thrid party library
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
-  contacts: any;
+  contacts: any= [];
+  contactdetails: {}
   errorMsg: any;
-
+  public editMode: boolean = false
+  @Input() providerid: number
   constructor(private router: Router,
-              private conService: ContactsService) { }
+              private conService: ContactsService,
+              private spService: SpService) { }
 
-  ngOnInit(): void {
-    this.conService.getContacts().subscribe(
-      (data) => this.contacts = data['data']['rows'],
-      (error) => this.errorMsg = error,
+   ngOnInit():  void {
+     let contacts: []
+     this.conService.getContacts(this.providerid).subscribe(
+      data => {
+        console.log(data)
+        contacts = data['data']['rows']
+      },
+      error => console.log(error),
+      () => {
+        this.contacts = contacts
+      }
     )
+    console.log(this.contacts)
   }
 
   editContact(contact: any){
@@ -30,11 +42,23 @@ export class ContactsComponent implements OnInit {
 
   deleteContact(contact: any){
     this.conService.deleteContact(contact.providerid, contact.contactid).subscribe(() => {
-      this.conService.getContacts().subscribe(
+      this.conService.getContacts(this.providerid).subscribe(
         (data) => this.contacts = data['data']['rows'],
         (error) => this.errorMsg = error
       )
     })
+  }
+
+  activateEditMode(){
+    if(!this.editMode)
+      this.editMode = true
+    else{
+      this.editMode = false
+    }
+  }
+
+  sendContactToModal(contact: {}){
+    this.contactdetails = contact
   }
 
   openSweetAlert(contact:any){

@@ -1,33 +1,49 @@
-<p>contacts works!</p>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">contactid</th>
-      <th scope="col">titleid</th>
-      <th scope="col">first_name</th>
-      <th scope="col">last_name</th>
-      <th scope="col">mobile_number</th>
-      <th scope="col">office_phone</th>
-      <th scope="col">fax</th>
-      <th scope="col">toll_free</th>
-      <th scope="col">email</th>
-      <th scope="col">providerid</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let contact of contacts">
-      <td>{{contact.contactid}}</td>
-      <td>{{contact.titleid}}</td>
-      <td>{{contact.first_name}}</td>
-      <td>{{contact.last_name}}</td>
-      <td>{{contact.mobile_number}}</td>
-      <td>{{contact.office_phone}}</td>
-      <td>{{contact.fax}}</td>
-      <td>{{contact.toll_free}}</td>
-      <td>{{contact.email}}</td>
-      <td>{{contact.providerid}}</td>
-      <td><button type="button" class="btn btn-primary"(click)="editContact(contact)">Edit</button>
-        <button type="button" class="btn btn-warning" (click)="openSweetAlert(contact)">Delete</button></td>
-    </tr>
-  </tbody>
-</table>
+<div *ngFor="let contact of contacts" >
+  <!--CARD DISPLAYING ONLY UNIQUE INFORMATION TO IDENTIFY CONTACT-->
+  <div class="card text-center text-white bg-dark my-1">
+      <h5 class="card-header">{{ contact['first_name'] }} {{contact['last_name']}}</h5>
+    <div class="card-body">
+      <h5 class="card-title">{{contact['titleid']}}</h5>
+      <p class="card-text">{{ contact['last_name'] || Uppercase }} can be reached at {{ contact['mobile_number'] }} or at {{ contact['email'] }}</p>
+      <button type="button" class="btn btn-sm btn-outline-info" (click)="sendContactToModal(contact)" data-bs-toggle="modal" data-bs-target="#contactModal">ViewInfo</button>
+    </div>
+  </div>
+</div>
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
+
+
+<!--ADDING CONTACT_MODAL MODAL-->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="contactModalLabel">{{ contactdetails['first_name'] }} {{contactdetails['last_name']}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="!editMode else elseBlock">
+          <ul class="list-group">
+            <li class="list-group-item"><b>ContactID: </b>{{ contactdetails['contactid'] }}</li>
+            <li class="list-group-item"><b>TitleID: </b>{{ contactdetails['titleid'] }}</li>
+            <li class="list-group-item"><b>First Name: </b>{{ contactdetails['first_name'] }}</li>
+            <li class="list-group-item"><b>Last Name: </b>{{ contactdetails['last_name'] }}</li>
+            <li class="list-group-item"><b>Mobile #: </b>{{ contactdetails['mobile_number'] }}</li>
+            <li class="list-group-item"><b>Office #: </b>{{ contactdetails['office_number'] }}</li>
+            <li class="list-group-item"><b>Fax #: </b>{{ contactdetails['fax'] }}</li>
+            <li class="list-group-item"><b>Toll Free: </b>{{ contactdetails['toll_free'] }}</li>
+            <li class="list-group-item"><b>Email: </b>{{ contactdetails['email'] }}</li>
+            <li class="list-group-item"><b>ProviderID: </b>{{ contactdetails['providerid'] }}</li>
+          </ul>
+        </div>
+        <ng-template #elseBlock>
+          <app-editcontract [contactDetails]="contactdetails"></app-editcontract>
+        </ng-template>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="activateEditMode()">Edit</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^-->

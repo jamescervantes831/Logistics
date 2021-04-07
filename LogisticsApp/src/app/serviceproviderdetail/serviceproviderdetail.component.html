@@ -1,5 +1,5 @@
 <div class="row">
-<div class="col-9">
+<div class="col-8">
     <div *ngIf="sp && !activatedForm, else editForm">
         <h2 [ngStyle]="{'margin-bottom':'25px'}">Sevice Provider's Detail</h2>
         <p>Provider_ID: {{sp.providerid}}</p>
@@ -49,10 +49,10 @@
         </form>
     </ng-template>
 </div>
-<div class="col-3">
+<div class="col-4">
     <div class="row">
         <div class="col-12">
-            <app-contacts></app-contacts>
+            <app-contacts [providerid] ="providerid"></app-contacts>
         </div>
         <div class="col-12">
             <app-notes></app-notes>
