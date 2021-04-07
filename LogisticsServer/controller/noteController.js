@@ -53,9 +53,9 @@ module.exports = {
     AddNote: (req, res) => {
 
         if (req.params.providerid == undefined || req.body.title == undefined || req.body.body == undefined) {
-            console.log("BODY TITLE: "+req.body.title)
-            console.log("BODY BODY: "+req.body.body)
-            console.log("PARAMS: "+req.params.providerid)
+            console.log("BODY TITLE: " + req.body.title)
+            console.log("BODY BODY: " + req.body.body)
+            console.log("PARAMS: " + req.params.providerid)
             return res.status(400).json({
                 message: "Invalid parameter"
             })
@@ -83,10 +83,11 @@ module.exports = {
     UpdateNote: (req, res) => {
         results = [];
 
-        if (req.body.title != null || req.body.title != undefined) {
+        if (req.body.title != null || req.body.title != undefined || req.body.body != undefined) {
             queryString =
                 `UPDATE notes
-                SET title = '${req.body.title}'
+                SET title = '${req.body.title}',
+                    body = '${ req.body.body }'           
                 WHERE noteid = ${req.params.noteid};`
 
             runQuery(queryString,
@@ -97,27 +98,12 @@ module.exports = {
                 }
             )
 
+        } else {
+            return res.status(400).json({
+                message: "Failed to update note, one or more parameters are undefined.",
+                data: results
+            })
         }
-
-        if (req.body.body != null || req.body.title != undefined) {
-            queryString =
-                `UPDATE notes
-            SET body = '${req.body.body}'
-            WHERE noteid = ${req.params.noteid};`
-
-            runQuery(queryString,
-                (err, result => {
-                    if (err) return res.json(err);
-
-                    results.push(result);
-                })
-            )
-        }
-
-        return res.status(200).json({
-            message: "Updated note.",
-            data: results
-        })
     },
 
     DeleteNote: (req, res) => {
