@@ -76,5 +76,13 @@ export class ServiceproviderdetailComponent implements OnInit {
     else
       this.activatedForm = true;
   }
+  
+  addContacts(providerid){
+    this.router.navigate(["/addcontact", providerid]);
+  }
+  editContacts(){
+    this.router.navigate(["/contactsList"]);
+  }
+
 
 }

@@ -1,1 +1,33 @@
 <p>contacts works!</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">contactid</th>
+      <th scope="col">titleid</th>
+      <th scope="col">first_name</th>
+      <th scope="col">last_name</th>
+      <th scope="col">mobile_number</th>
+      <th scope="col">office_phone</th>
+      <th scope="col">fax</th>
+      <th scope="col">toll_free</th>
+      <th scope="col">email</th>
+      <th scope="col">providerid</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let contact of contacts">
+      <td>{{contact.contactid}}</td>
+      <td>{{contact.titleid}}</td>
+      <td>{{contact.first_name}}</td>
+      <td>{{contact.last_name}}</td>
+      <td>{{contact.mobile_number}}</td>
+      <td>{{contact.office_phone}}</td>
+      <td>{{contact.fax}}</td>
+      <td>{{contact.toll_free}}</td>
+      <td>{{contact.email}}</td>
+      <td>{{contact.providerid}}</td>
+      <td><button type="button" class="btn btn-primary"(click)="editContact(contact)">Edit</button>
+        <button type="button" class="btn btn-warning" (click)="openSweetAlert(contact)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>

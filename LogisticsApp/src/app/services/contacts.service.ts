@@ -14,8 +14,20 @@ export class ContactsService {
   constructor( private http: HttpClient,
     private urlService: URLService) { }
 
-  getContacts(providerid: number):Observable<Contact[]>{
-    return this.http.get<Contact[]>(`${this._url}/${providerid}`)
+  getContacts():Observable<Contact[]>{
+    return this.http.get<Contact[]>(`${this._url}`)
+  }
+  getContactById(providerid: Number, contactid: Number):Observable<Contact[]>{
+    return this.http.get<Contact[]>(this._url + '/' + providerid + '/'+ contactid)
+  }
+  updateContact(providerid: Number, contactid: Number, contactForm: any):Observable<Contact[]>{
+    return this.http.put<Contact[]>(this._url + '/' + providerid + '/'+ contactid, contactForm)
+  }
+  deleteContact(providerid: Number, contactid: Number):Observable<Contact[]>{
+    return this.http.delete<Contact[]>(this._url + '/' + providerid + '/'+ contactid)
+  }
+  postContact(providerid: Number, contactForm: any):Observable<Contact[]>{
+    return this.http.post<Contact[]>(this._url + '/' + providerid, contactForm)
   }
 
 }
