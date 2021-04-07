@@ -10,6 +10,9 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { ServiceproviderdetailComponent } from './serviceproviderdetail/serviceproviderdetail.component';
 import { ServiceproviderlistComponent } from './serviceproviderlist/serviceproviderlist.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ContactsComponent } from './contacts/contacts.component';
+import { EditcontactComponent } from './editcontact/editcontact.component';
+import { AddcontactComponent } from './addcontact/addcontact.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -21,6 +24,9 @@ const routes: Routes = [
   { path: 'forgotpassword', component: ForgotpasswordComponent},
   { path: 'loginfail', component: LoginfailComponent },
   { path: 'resetpassword', component: ResetpasswordComponent},
+  { path: 'contactsList', component: ContactsComponent},
+  { path: 'editcontact/:ProviderID/:ContactID', component: EditcontactComponent},
+  { path: 'addcontact/:ProviderID', component: AddcontactComponent},
   { path: "**", component: PagenotfoundComponent},
 ];
 

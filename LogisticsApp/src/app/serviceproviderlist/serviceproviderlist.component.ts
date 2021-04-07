@@ -21,7 +21,7 @@ export class ServiceproviderlistComponent implements OnInit {
     this.spService.getProvidersByUserId(this.userid).subscribe(
       (data) =>{
         this.serviceproviders = data['data']['rows']
-        console.log(this.serviceproviders)
+        //console.log(this.serviceproviders)
       }
     )
   }
