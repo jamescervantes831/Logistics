@@ -57,15 +57,18 @@ input[type=submit]:hover {
     margin: 6px;
     width: 50%;
     min-width: 240px;
+    height: 100%;
 }
 
 #provider_form {
     margin: auto auto;
 }
 
-#provider_linked {
+.provider_linked {
     flex-grow: 1;
     padding: 3px;
+    width: 100%;
+    height: 100%;
 }
 
 h3 {
@@ -76,7 +79,8 @@ h3 {
 #contacts_list,
 #notes_list {
     overflow-y: scroll;
+    width: 100%;
     margin: 3px;
-    height: 40%;
+    height: 400px;
     background: grey;
 }
