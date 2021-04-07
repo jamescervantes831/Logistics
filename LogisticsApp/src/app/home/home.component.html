@@ -1,6 +1,8 @@
 <h2>Welcome to Service Management System! </h2>
-<button type="button" class="btn btn-outline-primary" routerLink="/resetpassword" routerLinkActive="active">Reset Password</button>
+<div class="subnav">
+    <button type="button" class="subnav_button" routerLink="/resetpassword" routerLinkActive="active">Reset Password</button>
 
-<button type="button" class="btn btn-pink" [routerLink]="['/serviceproviderlist']" routerLinkActive="active"> Service Providers List</button>
+    <button type="button" class="subnav_button" [routerLink]="['/serviceproviderlist']" routerLinkActive="active"> Service Providers List</button>
 
-<button type="button" class="btn btn-outline-danger" routerLink="/addserviceprovider" routerLinkActive="active">Add Service Provider</button>
+    <button type="button" class="subnav_button" routerLink="/addserviceprovider" routerLinkActive="active">Add Service Provider</button>
+</div>

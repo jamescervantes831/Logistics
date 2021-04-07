@@ -1,0 +1,22 @@
+.subnav {
+    width: 100%;
+    display: flex;
+}
+
+.subnav_button {
+    width: 33%;
+    border: none;
+    background-color: #32393f;
+    font-size: 1.4em;
+    min-height: 30px;
+    color: white;
+}
+
+.subnav_button:hover {
+    font-weight: bold;
+    background-color: grey;
+}
+
+h2 {
+    text-align: center;
+}
