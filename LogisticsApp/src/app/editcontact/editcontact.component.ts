@@ -4,7 +4,7 @@ import { Validators, FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ContactsService } from '../services/contacts.service';
 import { Contact } from '../module/contacts'
 @Component({
-  selector: 'app-editcontract',
+  selector: 'app-editcontact',
   templateUrl: './editcontact.component.html',
   styleUrls: ['./editcontact.component.css']
 })
