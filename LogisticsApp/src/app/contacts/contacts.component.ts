@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ContactsService } from '../services/contacts.service';
 import { SpService } from '../services/sp.service'
 import Swal from 'sweetalert2';//thrid party library
+import { Contact } from '../module/contacts';
                               //npm install sweetalert2
                               //before import here
 @Component({
@@ -12,7 +13,18 @@ import Swal from 'sweetalert2';//thrid party library
 })
 export class ContactsComponent implements OnInit {
   contacts: any= [];
-  contactdetails: {}
+  contactdetails: Contact = { // dirty workaround so that angular doesn't throw errors and stop component from loading
+    first_name: "",
+    last_name: "",
+    contactid: null,
+    titleid: "",
+    mobile_number: "",
+    office_phone: "",
+    fax: "",
+    toll_free: "",
+    email: "",
+    providerid: null
+  }
   errorMsg: any;
   public editMode: boolean = false
   @Input() providerid: number
@@ -57,7 +69,7 @@ export class ContactsComponent implements OnInit {
     }
   }
 
-  sendContactToModal(contact: {}){
+  sendContactToModal(contact: Contact){
     this.contactdetails = contact
   }
 
