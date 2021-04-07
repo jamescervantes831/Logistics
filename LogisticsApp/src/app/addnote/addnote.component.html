@@ -1,1 +1,12 @@
-<p>addnote works!</p>
+<form [formGroup]="noteForm" (ngSubmit)="onSubmit(noteForm.getRawValue())" method="POST">
+    <input type="hidden" class="form-control" formControlName="providerid">
+
+    <label for="title"><b>Title ID</b></label>
+    <input type="text" class="form-control" formControlName="title">
+    <label for="body"><b>Body</b></label>
+    <textarea id="body" class="form-control" formControlName="body" rows="auto" cols="auto"></textarea>
+
+    
+
+    <button type="submit" class="btn btn-primary" routerLink="/serviceproviderdetail">Submit</button>
+</form>
