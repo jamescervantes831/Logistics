@@ -12,10 +12,10 @@ export class AddserviceproviderComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private spService: SpService,
     private router: Router) { }
-  
+  private userid: string = this.spService.getUserID()
   public providerForm = this.fb.group({
     providerid: [''], // <-- This is a d used just to pass the idhidden fiel
-    manager: ['', [Validators.required]],
+    manager: [this.userid, [Validators.required]],
     name: ['', [Validators.required]],
     address_1: ['', [Validators.required]],
     address_2: ['', [Validators.required]],

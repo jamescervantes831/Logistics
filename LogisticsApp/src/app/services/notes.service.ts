@@ -8,6 +8,6 @@ export class NotesService {
 
   private _url: string = this.urlService.getNotes_URL();
 
-  constructor(private http: HttpClie,
+  constructor(private http: HttpClient,
     private urlService: URLService) { }
 }
