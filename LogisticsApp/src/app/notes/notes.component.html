@@ -1,4 +1,37 @@
-<p>notes work</p>
 <div *ngFor="let note of notes">
-    <p>{{ note['title'] }}</p>
+    <!--CARD DISPLAYING ONLY UNIQUE INFORMATION TO IDENTIFY CONTACT-->
+    <div class="card text-center text-white bg-dark my-1">
+        <h5 class="card-header">{{note['title']}}</h5>
+        <div class="card-body">
+            <p class="card-text">{{ note['body'] }} </p>
+            <button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#noteModal" (click)="sendNote(note)">View Note</button>
+        </div>
+    </div>
+</div>
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
+
+
+<!--ADDING CONTACT_MODAL MODAL-->
+<div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="noteModalLabel">{{ spDetail['manager'] }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="!editmode else editModeActivated">
+                    <app-addnote [providerid]="providerid"></app-addnote>
+                </div>
+                <ng-template #editModeActivated>
+                    <app-editnote [note]="oneNote"></app-editnote>
+                </ng-template>
+            </div>
+            <div class="modal-footer">
+                <button *ngIf="!editmode" type="button" class="btn btn-danger" (click)="editMode()">Edit</button>
+                <button *ngIf="editmode" type="button" class="btn btn-danger" (click)="editMode()">Add Note</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
