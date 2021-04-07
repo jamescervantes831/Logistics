@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { SessionHandlerService } from '../services/session-handler.service';
 
 @Component({
@@ -8,14 +8,20 @@ import { SessionHandlerService } from '../services/session-handler.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  constructor(private router: Router,
+    private activateRoute: ActivatedRoute) { }
 
-  constructor(private router: Router) { }
-
+  private userid: string
   ngOnInit(): void {
     if(!SessionHandlerService.CheckSession())
       {
         this.router.navigate(['/login'])
       }
+      this.activateRoute.paramMap.subscribe((params: ParamMap) =>{
+        this.userid = params.get('userid')
+      })
   }
-
+  getUserid(){
+    return this.userid
+  }
 }
