@@ -20,7 +20,11 @@ export class LoginComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(3)] ]
   });;
 
-  ngOnInit(): void {  }
+  ngOnInit(): void {
+    if(SessionHandlerService.CheckSession()){ // a user is already logged in
+      this.router.navigate(['/home'])
+    }
+   }
 
   onSubmit(loginForm: FormGroup): void{
     let usersInfo: any;
