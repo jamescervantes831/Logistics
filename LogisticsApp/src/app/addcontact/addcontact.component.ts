@@ -40,7 +40,7 @@ export class AddcontactComponent implements OnInit {
       this.conService.postContact(pid,this.contactForm.value).subscribe(
       (data) => {
         this.contacts = data; 
-        this.conService.getContacts().subscribe(
+        this.conService.getContacts(pid).subscribe(
           (data) => this.contacts = data,
           (error) => this.errorMsg = error
         )
@@ -48,7 +48,7 @@ export class AddcontactComponent implements OnInit {
       (error) => this.errorMsg = error
     )
     this.router.navigate(['/contactsList']);
-    this.conService.getContacts().subscribe(
+    this.conService.getContacts(pid).subscribe(
       (data) => this.contacts = data,
       (error) => this.errorMsg = error,
       () => console.log("completed")

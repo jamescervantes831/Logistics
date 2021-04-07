@@ -15,7 +15,7 @@ export class ServiceproviderdetailComponent implements OnInit {
     private fb: FormBuilder) { }
 
   public sp: any = {}
-  private providerid: number = this.spService.getProviderID()
+  public providerid: number = this.spService.getProviderID()
   private userid: string = this.spService.getUserID()
   public activatedForm: boolean = false
 

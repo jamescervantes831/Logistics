@@ -30,6 +30,7 @@ export class ServiceproviderlistComponent implements OnInit {
     return this.userid
   }
   setProviderID(providerid: number):void{
+    console.log(providerid)
     this.spService.setProviderID(providerid)
   }
   // openSweetAlert(employee:any){
