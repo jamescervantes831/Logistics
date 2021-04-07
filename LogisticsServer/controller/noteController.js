@@ -51,13 +51,16 @@ module.exports = {
     },
 
     AddNote: (req, res) => {
+
+        if (req.params.providerid == undefined || req.body.title == undefined || req.body.body == undefined) {
+            return res.status(400).json({
+                message: "Invalid parameter"
+            })
+        }
+
         queryString =
             `INSERT INTO notes (providerid, title, body)
             VALUES (${req.params.providerid}, '${req.body.title}', '${req.body.body}');`
-
-        console.log(req.params.providerid);
-        console.log(req.body.title);
-        console.log(req.body.body);
 
         runQuery(queryString,
             (err, result) => {
@@ -115,6 +118,11 @@ module.exports = {
     },
 
     DeleteNote: (req, res) => {
+        if (req.params.noteid == undefined) {
+            return res.status(400).json({
+                message: "Invalid parameter"
+            })
+        }
         queryString =
             `DELETE FROM notes
             WHERE noteid = ${req.params.noteid};`
