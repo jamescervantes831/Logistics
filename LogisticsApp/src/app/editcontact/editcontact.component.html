@@ -1,104 +1,101 @@
 <div class="container-fluid">
-  <br>
+    <br>
     <h2>Edit Contact</h2>
-    <form *ngIf="editcontactForm" [formGroup]="editcontactForm" (ngSubmit)="update(contactDetails['contactid'], editcontactForm)" novalidate>
-      <div class="row">
-      <div class="col-6">
-        <label for="contactid">ContactID</label>
-        <!--[class.is-invalid]="$any(contactid).invalid && $any(contactid).touched"-->
-        <input type="text" formControlName="contactid" class="form-control-plaintext" >
+    <form *ngIf="editcontactForm" [formGroup]="editcontactForm" (ngSubmit)="update(editcontactForm)" novalidate>
+        <div class="row">
+
+            <!--[class.is-invalid]="$any(contactid).invalid && $any(contactid).touched"-->
+            <input type="hidden" formControlName="contactid" class="form-control-plaintext">
             <!-- <div *ngIf="$any(contactid).errors && $any(contactid).touched">
                <div class="alert alert-danger" *ngIf="$any(contactid).errors?.required">ID is required</div>
               <div class="alert alert-danger" *ngIf="$any(contactid).errors?.minlength">ID must be a number</div>
             </div> -->
-      </div>
-      <div class="col-6">
-        <label for="titleid">TitleID</label>
-        <!-- [class.is-invalid]="$any(titleid).invalid && $any(titleid).touched"  -->
-        <input type="text" 
-        formControlName="titleid" class="form-control">
-            <!-- <div *ngIf="$any(titleid).errors && $any(titleid).touched">
+
+            <div class="col-6">
+                <label for="titleid">TitleID</label>
+                <!-- [class.is-invalid]="$any(titleid).invalid && $any(titleid).touched"  -->
+                <input type="text" formControlName="titleid" class="form-control">
+                <!-- <div *ngIf="$any(titleid).errors && $any(titleid).touched">
                <div class="alert alert-danger" *ngIf="$any(titleid).errors?.required">TitleID is required</div>
               <div class="alert alert-danger" *ngIf="$any(titleid).errors?.minlength">TitleID must be at least 2 numbers</div>
             </div> -->
-          </div>
-          <div class="col-6">
-          <label for="first_name">First Name</label>
-          <!-- [class.is-invalid]="$any(first_name).invalid && $any(first_name).touched"  -->
-          <input type="text" formControlName="first_name" class="form-control">
-              <!-- <div *ngIf="$any(first_name).errors && $any(first_name).touched">
+            </div>
+            <div class="col-6">
+                <label for="first_name">First Name</label>
+                <!-- [class.is-invalid]="$any(first_name).invalid && $any(first_name).touched"  -->
+                <input type="text" formControlName="first_name" class="form-control">
+                <!-- <div *ngIf="$any(first_name).errors && $any(first_name).touched">
                 <div class="alert alert-danger" *ngIf="$any(first_name).errors?.required">First Name is required</div>
                 <div class="alert alert-danger" *ngIf="$any(first_name).errors?.minlength">First Name must be at least 1 characters</div>
               </div> -->
             </div>
-              <div class="col-6">
-        <label for="last_name">Last Name</label>
-        <!-- [class.is-invalid]="$any(last_name).invalid && $any(last_name).touched"  -->
-        <input type="text" formControlName="last_name" class="form-control">
-            <!-- <div *ngIf="$any(last_name).errors && $any(last_name).touched">
+            <div class="col-6">
+                <label for="last_name">Last Name</label>
+                <!-- [class.is-invalid]="$any(last_name).invalid && $any(last_name).touched"  -->
+                <input type="text" formControlName="last_name" class="form-control">
+                <!-- <div *ngIf="$any(last_name).errors && $any(last_name).touched">
               <div class="alert alert-danger" *ngIf="$any(last_name).errors?.required">Last Name is required</div>
               <div class="alert alert-danger" *ngIf="$any(last_name).errors?.minlength">Last Name must be at least 1 characters</div>
             </div> -->
-          </div>
+            </div>
             <div class="col-6">
-      <label for="mobile_number">mobile_number</label>
-      <!--  [class.is-invalid]="$any(mobile_number).invalid && $any(mobile_number).touched"  -->
-      <input type="text" formControlName="mobile_number" class="form-control">
-          <!-- <div *ngIf="$any(mobile_number).errors && $any(mobile_number).touched">
+                <label for="mobile_number">mobile_number</label>
+                <!--  [class.is-invalid]="$any(mobile_number).invalid && $any(mobile_number).touched"  -->
+                <input type="text" formControlName="mobile_number" class="form-control">
+                <!-- <div *ngIf="$any(mobile_number).errors && $any(mobile_number).touched">
             <div class="alert alert-danger" *ngIf="$any(mobile_number).errors?.required">Mobile number is required</div>
             <div class="alert alert-danger" *ngIf="$any(mobile_number).errors?.minlength">Mobile number must be numbers</div>
           </div> -->
-        </div>
-          <div class="col-6">
-      <label for="office_phone">office_phone</label>
-      <!-- [class.is-invalid]="$any(office_phone).invalid && $any(office_phone).touched"  -->
-      <input type="text" formControlName="office_phone" class="form-control">
-          <!-- <div *ngIf="$any(office_phone).errors && $any(office_phone).touched">
+            </div>
+            <div class="col-6">
+                <label for="office_phone">office_phone</label>
+                <!-- [class.is-invalid]="$any(office_phone).invalid && $any(office_phone).touched"  -->
+                <input type="text" formControlName="office_phone" class="form-control">
+                <!-- <div *ngIf="$any(office_phone).errors && $any(office_phone).touched">
             <div class="alert alert-danger" *ngIf="$any(office_phone).errors?.required">Office phone is required</div>
             <div class="alert alert-danger" *ngIf="$any(office_phone).errors?.minlength">Office phone must be numbers</div>
           </div> -->
-        </div>
-          <div class="col-6">
-      <label for="fax">fax</label>
-      <!-- [class.is-invalid]="$any(fax).invalid && $any(fax).touched"  -->
-      <input type="text" formControlName="fax" class="form-control">
-          <!-- <div *ngIf="$any(fax).errors && $any(fax).touched">
+            </div>
+            <div class="col-6">
+                <label for="fax">fax</label>
+                <!-- [class.is-invalid]="$any(fax).invalid && $any(fax).touched"  -->
+                <input type="text" formControlName="fax" class="form-control">
+                <!-- <div *ngIf="$any(fax).errors && $any(fax).touched">
             <div class="alert alert-danger" *ngIf="$any(fax).errors?.required">Fax is required</div>
             <div class="alert alert-danger" *ngIf="$any(fax).errors?.minlength">Fax must be numbers</div>
           </div> -->
-        </div>
-        <div class="col-6">
-      <label>toll_free</label>
-      <!--  [class.is-invalid]="$any(toll_free).invalid && $any(toll_free).touched"  -->
-      <input type="text" formControlName="toll_free" class="form-control">
-          <!-- <div *ngIf="$any(toll_free).errors && $any(toll_free).touched">
+            </div>
+            <div class="col-6">
+                <label>toll_free</label>
+                <!--  [class.is-invalid]="$any(toll_free).invalid && $any(toll_free).touched"  -->
+                <input type="text" formControlName="toll_free" class="form-control">
+                <!-- <div *ngIf="$any(toll_free).errors && $any(toll_free).touched">
             <div class="alert alert-danger" *ngIf="$any(toll_free).errors?.required">Toll_free is required</div>
             <div class="alert alert-danger" *ngIf="$any(toll_free).errors?.minlength">Toll_free must be numbers</div>
           </div> -->
-          </div>
-      <div class="col-6">
-      <label>email</label>
-      <!--  [class.is-invalid]="$any(email).invalid && $any(email).touched"  -->
-      <input type="text" formControlName="email" class="form-control">
-          <!-- <div *ngIf="$any(email).errors && $any(email).touched">
+            </div>
+            <div class="col-6">
+                <label>email</label>
+                <!--  [class.is-invalid]="$any(email).invalid && $any(email).touched"  -->
+                <input type="text" formControlName="email" class="form-control">
+                <!-- <div *ngIf="$any(email).errors && $any(email).touched">
             <div class="alert alert-danger" *ngIf="$any(email).errors?.required">email is required</div>
             <div class="alert alert-danger" *ngIf="$any(email).errors?.minlength">email must has @</div>
           </div> -->
 
-      </div>
-      <div class="col-6">
-      <label>providerid</label>
-      <!--  [class.is-invalid]="$any(providerid).invalid && $any(providerid).touched"  -->
-      <input type="text" formControlName="providerid" class="form-control-plaintext" >
-          <!-- <div *ngIf="$any(providerid).errors && $any(providerid).touched">
+            </div>
+
+            <!--  [class.is-invalid]="$any(providerid).invalid && $any(providerid).touched"  -->
+            <input type="hidden" formControlName="providerid" class="form-control-plaintext">
+            <!-- <div *ngIf="$any(providerid).errors && $any(providerid).touched">
              <div class="alert alert-danger" *ngIf="$any(providerid).errors?.required">providerid is required</div>
             <div class="alert alert-danger" *ngIf="$any(firstName).errors?.minlength">providerid must be numbers</div>
           </div> -->
+
+            <button class="btn btn-primary" type="submit">Update form</button>
         </div>
-    <button class="btn btn-primary" type="submit">Update form</button>
-  </div>  
-  </form>
+    </form>
     <div class="alert alert-danger" *ngIf="errorMsg">
-      {{errorMsg}}
+        {{errorMsg}}
     </div>
-  </div>
+</div>

@@ -9,15 +9,14 @@ import { Contact } from '../module/contacts'
   styleUrls: ['./editcontact.component.css']
 })
 export class EditcontactComponent implements OnInit {
-
   @Input() contactDetails = {};
   contactId: any;
   errorMsg: any;
   contacts: any;
   providerId: number;
 
-  constructor(private conService: ContactsService, 
-              private fb: FormBuilder, 
+  constructor(private conService: ContactsService,
+              private fb: FormBuilder,
               private router: Router) { }
 
   public editcontactForm = this.fb.group({
@@ -31,12 +30,10 @@ export class EditcontactComponent implements OnInit {
     toll_free: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     email: ['', [Validators.required, Validators.minLength(3)]],
     providerid: [0, [Validators.required, Validators.pattern('^[0-9]+$')]],
-  });;
+  });
   ngOnInit(): void {
     for(let details in this.contactDetails){
       if(this.contactDetails[details] && this.editcontactForm.get(details)){
-        console.log(JSON.stringify(`DETAILS: ${details}`))
-        console.log(`${details}: ${this.contactDetails[details]}`)
         this.editcontactForm.get(details).setValue(this.contactDetails[details])
       }
     }
@@ -45,21 +42,22 @@ export class EditcontactComponent implements OnInit {
 
   }
 
-  update(contactId:number, editcontactForm: any){
+  update(editcontactForm: FormGroup){
+    var provid = editcontactForm.getRawValue().providerid
+    var contid = editcontactForm.getRawValue().contactid
     //console.log(this.editcontactForm.value.providerid);
-    this.conService.updateContact(this.providerId,contactId,editcontactForm).subscribe(
+    this.conService.updateContact(provid,contid,editcontactForm.getRawValue()).subscribe(
       (data) => { console.log(data)
       },
       (error) => {this.errorMsg = error; console.log(error); }
     );
-    
-    this.router.navigate(['/contactsList']);
-    this.conService.getContacts(1).subscribe(
-      (data) => this.contacts = data,
-      (error) => this.errorMsg = error,
-      () => console.log("completed")
-    )
-    this.editcontactForm.reset();
+    // this.router.navigate(['/']);
+    // this.conService.getContacts(1).subscribe(
+    //   (data) => this.contacts = data,
+    //   (error) => this.errorMsg = error,
+    //   () => console.log("completed")
+    // )
+    // this.editcontactForm.reset();
   }
 
 }
