@@ -53,6 +53,9 @@ module.exports = {
     AddNote: (req, res) => {
 
         if (req.params.providerid == undefined || req.body.title == undefined || req.body.body == undefined) {
+            console.log("BODY TITLE: "+req.body.title)
+            console.log("BODY BODY: "+req.body.body)
+            console.log("PARAMS: "+req.params.providerid)
             return res.status(400).json({
                 message: "Invalid parameter"
             })

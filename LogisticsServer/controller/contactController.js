@@ -81,10 +81,12 @@ module.exports = {
                         data: result
                     });
                 });
+        }else {
+            return res.status(404).json({
+                message: "Undefined field detected"
+            })
         }
-        return res.status(404).json({
-            message: "Undefined field detected"
-        })
+
     },
 
     updateContact: (req, res) => {
