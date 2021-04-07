@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { SpService } from '../services/sp.service'
 import Swal from 'sweetalert2';
+import { SessionHandlerService } from '../services/session-handler.service';
 
 @Component({
   selector: 'app-serviceproviderlist',
@@ -10,18 +11,27 @@ import Swal from 'sweetalert2';
 })
 export class ServiceproviderlistComponent implements OnInit {
   serviceproviders=[];
-
-  constructor(private spService: SpService) { }
+  private userid: string = this.spService.getUserID();
+  constructor(private spService: SpService, 
+    private router: Router,
+    private activateRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.spService.getProviders().subscribe(
+    if(!SessionHandlerService.CheckSession()) this.router.navigate(['/login'])
+    this.spService.getProvidersByUserId(this.userid).subscribe(
       (data) =>{
         this.serviceproviders = data['data']['rows']
         //console.log(this.serviceproviders)
       }
     )
   }
-
+  
+  getUserid(): string{
+    return this.userid
+  }
+  setProviderID(providerid: number):void{
+    this.spService.setProviderID(providerid)
+  }
   // openSweetAlert(employee:any){
   //   Swal.fire({
   //     title: 'Are you sure?',

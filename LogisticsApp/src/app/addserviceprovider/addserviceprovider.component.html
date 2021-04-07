@@ -1,1 +1,30 @@
-<p>add works</p>
+<form [formGroup]="providerForm" (ngSubmit)="onSubmit()" method="POST">
+    <input type="hidden" class="form-control" formControlName="providerid">
+
+    <label for="manager"><b>Manager</b></label>
+    <input type="text" class="form-control" formControlName="manager" disabled>
+
+    <label for="name"><b>Name</b></label>
+    <input type="text" formControlName="name" class="form-control">
+
+    <label for="address_1"><b>Address_1</b></label>
+    <input type="text" formControlName="address_1" class="form-control">
+
+    <label for="address_2"><b>Address_2</b></label>
+    <input type="text" formControlName="address_2" class="form-control">
+
+    <label for="city"><b>City</b></label>
+    <input type="text" formControlName="city" class="form-control">
+
+    <label for="state"><b>State</b></label>
+    <input type="text" formControlName="state" class="form-control">
+
+    <label for="zip"><b>Zip</b></label>
+    <input type="number" formControlName="zip" class="form-control">
+
+    <label for="country"><b>Country</b></label>
+    <input type="text" formControlName="country" class="form-control">
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn btn-danger" routerLink="/serviceproviderlist">Cancel</button>
+</form>

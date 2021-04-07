@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms'
 import { SpService } from '../services/sp.service'
 
 @Component({
@@ -12,14 +12,15 @@ export class ServiceproviderdetailComponent implements OnInit {
 
   constructor(private router: Router,
     private spService: SpService,
-    private _ActivatedRoute: ActivatedRoute,
     private fb: FormBuilder) { }
 
-  public sp: any = {} 
-  public id: number
+  public sp: any = {}
+  private providerid: number = this.spService.getProviderID()
+  private userid: string = this.spService.getUserID()
   public activatedForm: boolean = false
 
   public providerForm = this.fb.group({
+    providerid: [''], // <-- This is a hidden field used just to pass the id
     manager: ['', [Validators.required]],
     name: ['', [Validators.required]],
     address_1: ['', [Validators.required]],
@@ -28,19 +29,14 @@ export class ServiceproviderdetailComponent implements OnInit {
     state: ['', [Validators.required]],
     zip: [0, [Validators.required]],
     country: ['', [Validators.required]]
-  }) 
+  })
 
   ngOnInit(): void {
-    this._ActivatedRoute.paramMap.subscribe((params: ParamMap) =>{
-      this.id = Number(params.get('providerid'))
-    })
-    this.spService.getProviderById(this.id).subscribe(
+    this.spService.getProviderById(this.providerid, this.userid).subscribe(
       async (data) => {
         this.sp = data['data']['rows'][0]
-        console.log(this.sp)
         for(let spProp in this.sp){
           if(this.sp[spProp] && this.providerForm.get(spProp)){
-            console.log(this.sp[spProp])
             this.providerForm.get(spProp).setValue(this.sp[spProp])
           }
         }
@@ -53,12 +49,14 @@ export class ServiceproviderdetailComponent implements OnInit {
       (data) => {
         this.sp = this.providerForm.value
         this.activatedForm = false
-      }
+      },
+      error => console.log(error),
+      () => console.log("UPDATE COMPLETE")
     )
   }
 
   del(){
-    this.spService.deleteProvider(this.id).subscribe(
+    this.spService.deleteProvider(this.providerid).subscribe(
       (data) =>{
         console.log(data)
       },
@@ -66,12 +64,12 @@ export class ServiceproviderdetailComponent implements OnInit {
       ()    => this.router.navigate(['/serviceproviderlist'])
     )
   }
-  
+
   goBack(){
     this.router.navigate(["/serviceproviderlist"]);
   }
   edit(){
-    if(this.activatedForm) 
+    if(this.activatedForm)
       this.activatedForm = false
     else
       this.activatedForm = true;

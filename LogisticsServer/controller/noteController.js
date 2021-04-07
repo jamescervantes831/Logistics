@@ -19,7 +19,7 @@ module.exports = {
     GetNotesByProvider: (req, res) => {
         queryString =
             `SELECT * FROM notes
-            WHERE providerid = '${req.params.providerid}';`
+            WHERE providerid = ${req.params.providerid};`
 
         runQuery(queryString,
             (err, result) => {
@@ -36,7 +36,7 @@ module.exports = {
     GetNote: (req, res) => {
         queryString =
             `SELECT * FROM notes
-            WHERE noteid = '${req.params.noteid}';`
+            WHERE noteid = ${req.params.noteid};`
 
         runQuery(queryString,
             (err, result) => {
@@ -53,7 +53,7 @@ module.exports = {
     AddNote: (req, res) => {
         queryString =
             `INSERT INTO notes (providerid, title, body)
-            VALUES ('${req.params.providerid}', '${req.body.title}', '${req.body.body}');`
+            VALUES (${req.params.providerid}, '${req.body.title}', '${req.body.body}');`
 
         console.log(req.params.providerid);
         console.log(req.body.title);
@@ -87,7 +87,7 @@ module.exports = {
                 (err, result) => {
                     if (err) return res.json(err);
 
-                    result.push(result);
+                    results.push(result);
                 }
             )
 
